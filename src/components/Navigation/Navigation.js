@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import SignOutButton from "../SignOut/SignOutButton.js";
+
 import * as ROUTES from "../../constants/routes.js";
 
 export default class Navigation extends Component {
@@ -22,6 +24,9 @@ export default class Navigation extends Component {
                </li>
                <li>
                   <Link to={ROUTES.ADMIN}>Administrator</Link>
+               </li>
+               <li>
+                  <SignOutButton />
                </li>
             </ul>
          </div>
