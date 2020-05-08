@@ -1,10 +1,15 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 
-import * as ROUTES from "../../constants/routes.js";
+import { PasswordForgetForm } from "../PasswordForget/PasswordForget.js";
+import PasswordChangeForm from "../PasswordChange/PasswordChange.js";
 
-export default class AccountPage extends Component {
-   render() {
-      return <h1>AccountPage</h1>;
-   }
-}
+const AccountPage = () => (
+   <div>
+      <h1>Do you want to change your password? You can change it:</h1>
+      <PasswordForgetForm />
+      <h1>Did you forgot your password? You can create a new one:</h1>
+      <PasswordChangeForm />
+   </div>
+);
+
+export default AccountPage;
