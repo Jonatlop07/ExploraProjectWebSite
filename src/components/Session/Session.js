@@ -1,10 +1,4 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import AuthUserContext from "./context.js";
+import withAuthentication from "./withAuthentication.js";
 
-import * as ROUTES from "../../constants/routes.js";
-
-export default class Session extends Component {
-   render() {
-      return <h1>Session</h1>;
-   }
-}
+export { AuthUserContext, withAuthentication };
