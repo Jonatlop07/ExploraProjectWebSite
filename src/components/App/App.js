@@ -28,11 +28,7 @@ class App extends Component {
          <Router>
             <Navigation authUser={this.state.authUser} />
             <hr />
-            <Route
-               exact
-               path={ROUTES.PUBLICATIONS}
-               component={PublicationsPage}
-            />
+            <Route exact path={ROUTES.EXPLORE} component={PublicationsPage} />
             <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
             <Route

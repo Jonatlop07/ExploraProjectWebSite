@@ -5,31 +5,36 @@ import SignOutButton from "../SignOut/SignOutButton.js";
 
 import * as ROUTES from "../../constants/routes.js";
 
-export default class Navigation extends Component {
-   render() {
-      return (
-         <div>
-            <ul>
-               <li>
-                  <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-               </li>
-               <li>
-                  <Link to={ROUTES.PUBLICATIONS}>Publications</Link>
-               </li>
-               <li>
-                  <Link to={ROUTES.HOME}>Home</Link>
-               </li>
-               <li>
-                  <Link to={ROUTES.ACCOUNT}>My Account</Link>
-               </li>
-               <li>
-                  <Link to={ROUTES.ADMIN}>Administrator</Link>
-               </li>
-               <li>
-                  <SignOutButton />
-               </li>
-            </ul>
-         </div>
-      );
-   }
-}
+const Navigation = ({ authUser }) => (
+   <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+);
+
+const NavigationAuth = () => (
+   <ul>
+      <li>
+         <Link to={ROUTES.EXPLORE}>Explore</Link>
+      </li>
+      <li>
+         <Link to={ROUTES.HOME}>Home</Link>
+      </li>
+      <li>
+         <Link to={ROUTES.ACCOUNT}>Account</Link>
+      </li>
+      <li>
+         <SignOutButton />
+      </li>
+   </ul>
+);
+
+const NavigationNonAuth = () => (
+   <ul>
+      <li>
+         <Link to={ROUTES.EXPLORE}>Explore</Link>
+      </li>
+      <li>
+         <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      </li>
+   </ul>
+);
+
+export default Navigation;
