@@ -1,10 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
-import * as ROUTES from "../../constants/routes.js";
+import { withAuthorization } from "../Session/Session.js";
 
-export default class HomePage extends Component {
+class HomePage extends Component {
    render() {
-      return <h1>HomePage</h1>;
+      return (
+         <div>
+            <h1>HomePage</h1>
+            <p>The Home Page is accessible by every signed in user.</p>
+         </div>
+      );
    }
 }
+
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(HomePage);

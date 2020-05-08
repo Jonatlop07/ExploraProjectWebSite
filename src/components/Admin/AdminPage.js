@@ -1,10 +1,15 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 
-import * as ROUTES from "../../constants/routes.js";
+import { withAuthorization } from "../Session/Session.js";
+import * as ROLES from "../../constants/roles.js";
 
-export default class AdminPage extends Component {
-   render() {
-      return <h1>AdminPage</h1>;
-   }
-}
+const AdminPage = () => (
+   <div>
+      <h1>Admin</h1>
+      <p>Restricted area! Only users with the admin role are authorized.</p>
+   </div>
+);
+
+const condition = authUser => authUser && !!authUser.roles[ROLES.ADMIN];
+
+export default withAuthorization(condition)(AdminPage);
