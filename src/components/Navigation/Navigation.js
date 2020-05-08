@@ -12,7 +12,7 @@ export default class Navigation extends Component {
                   <Link to={ROUTES.SIGN_IN}>Sign In</Link>
                </li>
                <li>
-                  <Link to={ROUTES.PUBLICATIONS}>Blog</Link>
+                  <Link to={ROUTES.PUBLICATIONS}>Publications</Link>
                </li>
                <li>
                   <Link to={ROUTES.HOME}>Home</Link>
