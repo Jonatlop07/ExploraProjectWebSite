@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Navigation from "../Navigation/Navigation.js";
 import PublicationsPage from "../Publications/PublicationsPage.js";
-import SignUpPage from "../SignUp/SignUpPage.js";
+import SignUpPage from "../SignUp/SignUp.js";
 import SignInPage from "../SignIn/SignInPage.js";
 import PasswordForgetPage from "../PasswordForget/PasswordForgetPage.js";
 import HomePage from "../Home/HomePage.js";
@@ -15,7 +15,6 @@ import * as ROUTES from "../../constants/routes.js";
 import "./App.css";
 
 function App() {
-   const [] = React.useState(false);
    return (
       <Router>
          <Navigation />

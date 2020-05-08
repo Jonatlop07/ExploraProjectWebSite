@@ -5,6 +5,6 @@ import * as ROUTES from "../../constants/routes.js";
 
 export default class HomePage extends Component {
    render() {
-      return <Link></Link>;
+      return <h1>HomePage</h1>;
    }
 }

@@ -5,6 +5,6 @@ import * as ROUTES from "../../constants/routes.js";
 
 export default class SignOutPage extends Component {
    render() {
-      return <Link></Link>;
+      return <h1>SignOut</h1>;
    }
 }

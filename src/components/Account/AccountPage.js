@@ -5,6 +5,6 @@ import * as ROUTES from "../../constants/routes.js";
 
 export default class AccountPage extends Component {
    render() {
-      return <Link></Link>;
+      return <h1>AccountPage</h1>;
    }
 }

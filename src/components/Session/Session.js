@@ -5,6 +5,6 @@ import * as ROUTES from "../../constants/routes.js";
 
 export default class Session extends Component {
    render() {
-      return <Link></Link>;
+      return <h1>Session</h1>;
    }
 }
