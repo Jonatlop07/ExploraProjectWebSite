@@ -37,6 +37,9 @@ class Firebase {
    user = uid => this.db.ref(`users/${uid}`);
 
    users = () => this.db.ref(`users`);
+
+   //Pendiente para manejar las publicaciones
+   post = uid => this.db.ref(`users/${uid}/publications/1`);
 }
 
 export default Firebase;

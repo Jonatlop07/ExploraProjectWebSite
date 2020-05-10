@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { withFirebase } from "../Firebase";
+import { withFirebase } from "../Firebase/index.js";
 
 class AdminPage extends Component {
    constructor(props) {
@@ -10,8 +10,6 @@ class AdminPage extends Component {
          loading: false,
          users: [],
       };
-
-      this.componentDidMount = this.componentDidMount.bind(this);
    }
 
    componentDidMount() {
