@@ -40,6 +40,12 @@ class Firebase {
 
    //Pendiente para manejar las publicaciones
    post = uid => this.db.ref(`users/${uid}/publications/1`);
+
+   posts = () => this.db.ref(`publications`);
+
+   pushByTopic = (topic, object) => {
+      this.db.ref(`publications/${topic}`).push(object);
+   };
 }
 
 export default Firebase;

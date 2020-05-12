@@ -1,16 +1,8 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose } from "recompose";
+import { Link } from "react-router-dom";
 
 import { withFirebase } from "../Firebase/index.js";
 import * as ROUTES from "../../constants/routes.js";
-
-const SignUpPage = () => (
-   <div>
-      <h1>SignUp</h1>
-      <SignUpForm />
-   </div>
-);
 
 const INITIAL_STATE = {
    username: "",
@@ -20,17 +12,22 @@ const INITIAL_STATE = {
    error: null,
 };
 
-class SignUpFormBase extends Component {
+class SignUpPage extends Component {
    constructor(props) {
       super(props);
       this.state = { ...INITIAL_STATE };
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
+      this.handleLogin = this.handleLogin.bind(this);
+   }
+
+   handleLogin(isLoggedIn) {
+      this.props.handleAuth(isLoggedIn);
    }
 
    handleSubmit(event) {
       const { username, email, passwordOne } = this.state;
-      const publications = [];
+      const publications = null;
       this.props.firebase
          .doCreateUserWithEmailAndPassword(email, passwordOne)
          .then(authUser => {
@@ -41,11 +38,10 @@ class SignUpFormBase extends Component {
             });
          })
          .then(() => {
-            this.setState({ ...INITIAL_STATE });
-            this.props.history.push(ROUTES.HOME);
+            this.props.handleAuth(true);
          })
          .catch(error => {
-            this.setState({ error });
+            this.props.handleAuth(false);
          });
 
       event.preventDefault();
@@ -112,8 +108,6 @@ const SignUpLink = () => (
    </p>
 );
 
-const SignUpForm = compose(withRouter, withFirebase)(SignUpFormBase);
+export default withFirebase(SignUpPage);
 
-export default SignUpPage;
-
-export { SignUpForm, SignUpLink };
+export { SignUpPage, SignUpLink };

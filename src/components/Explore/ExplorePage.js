@@ -1,85 +1,68 @@
 import React, { Component } from "react";
 
-export default class ExplorePage extends Component {
+import PostContainer from "./PostContainer.js";
+
+import { withFirebase } from "../Firebase/index.js";
+
+class ExplorePage extends Component {
    constructor(props) {
       super(props);
 
       this.state = {
-         loading: false,
-         publications: [],
+         updated: false,
+         postContainers: [],
       };
+
+      this.handleDatabaseUpdate = this.handleDatabaseUpdate.bind(this);
+      this.updateDatabase = this.updateDatabase.bind(this);
+   }
+
+   handleDatabaseUpdate(isDatabaseUpdated) {
+      this.props.databaseUpdate(isDatabaseUpdated);
+   }
+
+   updateDatabase() {
+      this.props.firebase.posts().on("value", snapshot => {
+         const postTopicsObject = snapshot.val();
+
+         const postTopicsList = Object.keys(postTopicsObject).map(key => ({
+            ...postTopicsObject[key],
+            id: key,
+         }));
+
+         this.setState({
+            postContainers: postTopicsList,
+         });
+      });
    }
 
    componentDidMount() {
-      this.setState({ loading: true });
+      this.setState({ updated: true });
+
+      this.updateDatabase();
+
+      this.handleDatabaseUpdate(true);
+   }
+
+   componentWillUnmount() {
+      this.props.firebase.posts().off();
+      this.handleDatabaseUpdate(false);
    }
 
    render() {
+      if (this.state.postContainers.length == 0) {
+         this.updateDatabase();
+      }
       return (
          <div>
-            <h1>PublicationsPage</h1>;
-            <ContenedorPublicaciones />
+            <h1>PublicationsPage</h1>
+            {this.state.postContainers &&
+               this.state.postContainers.map((posts, key) => (
+                  <PostContainer key={key} posts={posts} />
+               ))}
          </div>
       );
    }
 }
 
-class Publicacion extends Component {
-   constructor(props) {
-      super(props);
-   }
-
-   render() {
-      return (
-         <div>
-            <a href={this.props.enlace}>{this.props.titulo}</a>
-            <h2>Fecha de publicación: {this.props.fecha}</h2>
-            <p>{this.props.descripcion}</p>
-         </div>
-      );
-   }
-}
-
-const arregloPublicaciones = [
-   {
-      enlace: "http://miPublicacion1.com",
-      titulo: "El arte en la vida de las personas",
-      fecha: "09/05/2020",
-      descripcion: "Etc",
-   },
-   {
-      enlace: "http://miPublicacion2.com",
-      titulo: "Desarrollo sostenible para una comunidad africana",
-      fecha: "08/05/2020",
-      descripcion: "Etc",
-   },
-   {
-      enlace: "http://miPublicacion3.com",
-      titulo: "Videojuegos que deberias probar",
-      fecha: "07/05/2020",
-      descripcion: "Etc",
-   },
-];
-
-class ContenedorPublicaciones extends Component {
-   render() {
-      const publicaciones = arregloPublicaciones.map((publicacion, index) => {
-         const { enlace, titulo, fecha, descripcion } = publicacion;
-         return (
-            <Publicacion
-               key={index}
-               enlace={enlace}
-               titulo={titulo}
-               fecha={fecha}
-               descripcion={descripcion}
-            />
-         );
-      });
-      return (
-         <div>
-            <h1>Publicaciones:</h1>
-            {publicaciones.length > 0 && publicaciones}
-         </div>
-      );
-   }
-}
+export default withFirebase(ExplorePage);
