@@ -47,3 +47,5 @@ class Stack {
         this.top = newNode;
     }
 }
+
+export default Stack;

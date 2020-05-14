@@ -9,19 +9,14 @@ class ExplorePage extends Component {
       super(props);
 
       this.state = {
-         updated: false,
+         updated: this.props.isUpdated,
          postContainers: [],
       };
 
-      this.handleDatabaseUpdate = this.handleDatabaseUpdate.bind(this);
-      this.updateDatabase = this.updateDatabase.bind(this);
+      this.updateFromDatabase = this.updateFromDatabase.bind(this);
    }
 
-   handleDatabaseUpdate(isDatabaseUpdated) {
-      this.props.databaseUpdate(isDatabaseUpdated);
-   }
-
-   updateDatabase() {
+   updateFromDatabase() {
       this.props.firebase.posts().on("value", snapshot => {
          const postTopicsObject = snapshot.val();
 
@@ -34,25 +29,21 @@ class ExplorePage extends Component {
             postContainers: postTopicsList,
          });
       });
+
+      this.setState({ isUpdated: true });
    }
 
-   componentDidMount() {
-      this.setState({ updated: true });
-
-      this.updateDatabase();
-
-      this.handleDatabaseUpdate(true);
+   componentWillMount() {
+      if (!this.state.isUpdated) {
+         this.updateFromDatabase();
+      }
    }
 
    componentWillUnmount() {
       this.props.firebase.posts().off();
-      this.handleDatabaseUpdate(false);
    }
 
    render() {
-      if (this.state.postContainers.length == 0) {
-         this.updateDatabase();
-      }
       return (
          <div>
             <h1>PublicationsPage</h1>

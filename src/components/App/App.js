@@ -33,7 +33,7 @@ function App() {
             <hr />
             <Switch>
                <Route exact path={ROUTES.EXPLORE}>
-                  <ExplorePage databaseUpdate={onDatabaseUpdate} />
+                  <ExplorePage isUpdated={isDatabaseUpdated} />
                </Route>
 
                <Route exact path={ROUTES.SIGN_IN}>
@@ -54,10 +54,7 @@ function App() {
 
                <Route exact path={ROUTES.HOME}>
                   {isAuth ? (
-                     <HomePage
-                        handleAuth={userAuthenticated}
-                        databaseUpdate={onDatabaseUpdate}
-                     />
+                     <HomePage databaseUpdate={onDatabaseUpdate} />
                   ) : (
                      <Redirect to={ROUTES.SIGN_IN} />
                   )}

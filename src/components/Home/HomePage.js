@@ -31,7 +31,6 @@ class HomePage extends Component {
 
    handleDatabaseUpdate(isDatabaseUpdated) {
       this.props.databaseUpdate(isDatabaseUpdated);
-      this.props.handleAuth(true);
    }
 
    handleSubmit(event) {
@@ -46,8 +45,6 @@ class HomePage extends Component {
          article,
       });
 
-      let username = "";
-
       this.props.firebase.pushByTopic(topic, {
          email,
          title,
@@ -57,7 +54,7 @@ class HomePage extends Component {
       });
 
       this.setState({ editing: false });
-      this.handleDatabaseUpdate(true);
+      this.handleDatabaseUpdate(false);
       event.preventDefault();
    }
 
@@ -115,11 +112,10 @@ class HomePage extends Component {
                            ))}
                         </select>
                      </section>
-                     <input
+                     <textarea
                         name="article"
                         value={article}
                         onChange={this.handleChange}
-                        type="text"
                         placeholder="This is the body of your post"
                      />
                      <button disabled={isInvalid} type="submit">
