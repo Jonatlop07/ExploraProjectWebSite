@@ -1,51 +1,51 @@
-import Node from "Node.js";
+import StackNode from "./StackNode.js";
 
 class Stack {
-    constructor() {
-        this.__top = null;
-    }
+   constructor() {
+      this.__top = null;
+   }
 
-    push(object) {
-        current = new Node(object);
+   push(object) {
+      const current = new StackNode(object);
 
-        if (this.isEmpty()) {
-            this.top = current;
-        } else {
-            current.next = this.top;
-            this.top = current;
-        }
-    }
+      if (this.isEmpty()) {
+         this.top = current;
+      } else {
+         current.next = this.top;
+         this.top = current;
+      }
+   }
 
-    query() {
-        if (this.isEmpty() {
-            return null;
-        } else {
-            return this.top.object;
-        }
-    }
+   query() {
+      if (this.isEmpty()) {
+         return null;
+      } else {
+         return this.top.object;
+      }
+   }
 
-    pop() {
-        if (this.isEmpty()){
-            return null;
-        } else {
-            objectToRemove = this.top.object;
-            this.top = this.top.next;
+   pop() {
+      if (this.isEmpty()) {
+         return null;
+      } else {
+         const objectToRemove = this.top.object;
+         this.top = this.top.next;
 
-            return objectToRemove;
-        }
-    }
+         return objectToRemove;
+      }
+   }
 
-    isEmpty() {
-        return this.top == null;
-    }
+   isEmpty() {
+      return this.__top == null;
+   }
 
-    get top () {
-        return this.top;
-    }
+   get top() {
+      return this.__top;
+   }
 
-    set top(newNode) {
-        this.top = newNode;
-    }
+   set top(newNode) {
+      this.__top = newNode;
+   }
 }
 
 export default Stack;

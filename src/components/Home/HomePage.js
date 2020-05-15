@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { withFirebase } from "../Firebase/index.js";
 
 import { mainTopics } from "./topics.js";
+import PostContainer from "./PostContainer.js";
 
 const INITIAL_STATE = {
    editing: false,
@@ -11,22 +12,56 @@ const INITIAL_STATE = {
    topic: "",
    article: "",
    error: null,
+   mainTopics,
 };
 
 class HomePage extends Component {
    constructor(props) {
       super(props);
 
-      this.state = { ...INITIAL_STATE, mainTopics, myPosts: [] };
+      this.state = { ...INITIAL_STATE, myPosts: [] };
 
       this.handleClick = this.handleClick.bind(this);
       this.handleDatabaseUpdate = this.handleDatabaseUpdate.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
+      this.updateFromDatabase = this.updateFromDatabase.bind(this);
+   }
+
+   componentWillMount() {
+      this.updateFromDatabase();
+   }
+
+   componentWillUpdate(nextProps, nextState) {
+      if (!this.state.editing && nextState.editing) {
+         this.updateFromDatabase();
+      }
+   }
+
+   componentWillUnmount() {
+      const userUID = this.props.firebase.auth.currentUser.uid;
+      this.props.firebase.userPosts(userUID).off();
+      mainTopics.forEach(topic => this.props.firebase.topic(topic).off());
+   }
+
+   updateFromDatabase() {
+      const userUID = this.props.firebase.auth.currentUser.uid;
+      this.props.firebase.userPosts(userUID).on("value", snapshot => {
+         const postsObject = snapshot.val();
+
+         const postsList = Object.keys(postsObject).map(key => {
+            return {
+               ...postsObject[key],
+               id: key,
+            };
+         });
+
+         this.setState({ myPosts: postsList });
+      });
    }
 
    handleClick() {
-      this.setState({ editing: true });
+      this.setState({ editing: this.state.editing ? false : true });
    }
 
    handleDatabaseUpdate(isDatabaseUpdated) {
@@ -36,24 +71,24 @@ class HomePage extends Component {
    handleSubmit(event) {
       const { title, date, topic, article } = this.state;
 
+      const newPublication = {
+         title,
+         date,
+         topic,
+         article,
+      };
+
       const { email, uid } = this.props.firebase.auth.currentUser;
 
-      this.props.firebase.post(uid).push({
-         title,
-         date,
-         topic,
-         article,
-      });
-
+      this.props.firebase.userPosts(uid).push(newPublication);
       this.props.firebase.pushByTopic(topic, {
          email,
-         title,
-         date,
-         topic,
-         article,
+         ...newPublication,
       });
 
+      this.state.myPosts.push(newPublication);
       this.setState({ editing: false });
+
       this.handleDatabaseUpdate(false);
       event.preventDefault();
    }
@@ -65,7 +100,15 @@ class HomePage extends Component {
    }
 
    render() {
-      const { title, date, topic, article, error, mainTopics } = this.state;
+      const {
+         title,
+         date,
+         topic,
+         article,
+         error,
+         mainTopics,
+         myPosts,
+      } = this.state;
 
       const isInvalid =
          title === "" ||
@@ -124,9 +167,17 @@ class HomePage extends Component {
 
                      {error && <p>{error.message}</p>}
                   </form>
+                  <button onClick={this.handleClick}>Cancel</button>
                </div>
             ) : (
-               <button onClick={this.handleClick}>New post</button>
+               <div>
+                  <button onClick={this.handleClick}>New post</button>
+                  {myPosts.length > 0 ? (
+                     <PostContainer posts={myPosts} />
+                  ) : (
+                     <p>There is no posts from you</p>
+                  )}
+               </div>
             )}
          </div>
       );

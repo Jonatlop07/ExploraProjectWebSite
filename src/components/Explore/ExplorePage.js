@@ -30,11 +30,11 @@ class ExplorePage extends Component {
          });
       });
 
-      this.setState({ isUpdated: true });
+      this.setState({ updated: true });
    }
 
    componentWillMount() {
-      if (!this.state.isUpdated) {
+      if (!this.state.updated) {
          this.updateFromDatabase();
       }
    }
@@ -47,7 +47,7 @@ class ExplorePage extends Component {
       return (
          <div>
             <h1>PublicationsPage</h1>
-            {this.state.postContainers &&
+            {this.state.postContainers.length > 0 &&
                this.state.postContainers.map((posts, key) => (
                   <PostContainer key={key} posts={posts} />
                ))}

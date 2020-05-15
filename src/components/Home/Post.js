@@ -16,16 +16,19 @@ class Post extends Component {
    }
 
    render() {
-      const { title, date, article, email } = this.props.value;
+      const { title, date, topic, article } = this.props.post;
+      //RECORDAR QUE EL ID SE GUARDA!!
       return (
          <div>
-            {title && <p>{title}</p>}
-            {email && <span>By {email}</span>}
-            {date && <span>Date: {date}</span>}
-            {article && (
-               <button onClick={this.handleClick}>
-                  Let me see the content
-               </button>
+            {this.props.post && (
+               <div>
+                  <p>{title}</p>
+                  <p>Date: {date}</p>
+                  <p>Topic: {topic}</p>
+                  <button onClick={this.handleClick}>
+                     Let me see the content
+                  </button>
+               </div>
             )}
             {this.state.isShowing && <p>{article}</p>}
          </div>

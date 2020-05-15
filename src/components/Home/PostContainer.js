@@ -12,17 +12,23 @@ class PostContainer extends Component {
          postsStack: new Stack(),
       };
 
+      this.loadObjectsIntoStack = this.loadObjectsIntoStack.bind(this);
       this.getPostsArray = this.getPostsArray.bind(this);
    }
 
    componentWillMount() {
+      this.loadObjectsIntoStack();
+   }
+
+   loadObjectsIntoStack() {
       const posts = this.props.posts;
-      Object.keys(posts).forEach(key => {
+      posts.forEach(post => {
          this.state.postsStack.push({
-            email: posts[key].email,
-            title: posts[key].title,
-            date: posts[key].date,
-            article: posts[key].article,
+            id: post.id,
+            title: post.title,
+            date: post.date,
+            topic: post.topic,
+            article: post.article,
          });
       });
    }
@@ -38,14 +44,12 @@ class PostContainer extends Component {
    }
 
    render() {
-      const postsComponents = this.getPostsArray();
-
+      const postArray = this.getPostsArray();
       return (
          <div>
-            <h1>{this.props.posts.id}:</h1>
             {this.state.loading && <p>Loading ...</p>}
-            {postsComponents.map((post, key) => (
-               <Post key={key} value={post} />
+            {postArray.map(post => (
+               <Post key={post.id} post={post} />
             ))}
          </div>
       );

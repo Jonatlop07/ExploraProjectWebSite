@@ -1,4 +1,4 @@
-class Node {
+class StackNode {
    constructor(object) {
       this.__object = object;
       this.__next = null;
@@ -20,3 +20,5 @@ class Node {
       this.__next = newNext;
    }
 }
+
+export default StackNode;
