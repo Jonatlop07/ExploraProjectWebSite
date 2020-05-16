@@ -44,8 +44,15 @@ class Firebase {
 
    topic = topic => this.db.ref(`publications/${topic}`);
 
+   getUserPostKey = uid =>
+      this.db.ref(`users/${uid}/publications`).child("1").getKey();
+
    pushByTopic = (topic, object) => {
       this.db.ref(`publications/${topic}`).push(object);
+   };
+
+   setByTopic = (topic, id, object) => {
+      this.db.ref(`publications/${topic}`).child(id).set(object);
    };
 }
 

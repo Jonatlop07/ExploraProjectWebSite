@@ -22,13 +22,17 @@ import "./App.css";
 
 function App() {
    const [isAuth, userAuthenticated] = useState(false);
-   const [isAdmin, userRole] = useState(true);
+   const [isAdmin, userRole] = useState(false);
    const [isDatabaseUpdated, onDatabaseUpdate] = useState(false);
 
    return (
       <Router>
          <div>
-            <Navigation auth={isAuth} handleAuth={userAuthenticated} />
+            <Navigation
+               auth={isAuth}
+               admin={isAdmin}
+               handleAuth={userAuthenticated}
+            />
             {isAuth && <SignOutButton handleLogOut={userAuthenticated} />}
             <hr />
             <Switch>

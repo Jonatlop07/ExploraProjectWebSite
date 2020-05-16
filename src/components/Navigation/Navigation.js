@@ -9,11 +9,11 @@ class Navigation extends Component {
          return <NavigationNonAuth />;
       }
 
-      return <NavigationAuth />;
+      return <NavigationAuth admin={this.props.admin} />;
    }
 }
 
-const NavigationAuth = () => (
+const NavigationAuth = props => (
    <ul>
       <li>
          <Link to={ROUTES.EXPLORE}>Explore</Link>
@@ -24,9 +24,13 @@ const NavigationAuth = () => (
       <li>
          <Link to={ROUTES.ACCOUNT}>Account</Link>
       </li>
-      <li>
-         <Link to={ROUTES.ADMIN}>Admin</Link>
-      </li>
+      {props.admin ? (
+         <li>
+            <Link to={ROUTES.ADMIN}>Admin</Link>
+         </li>
+      ) : (
+         <li>Normal User</li>
+      )}
    </ul>
 );
 

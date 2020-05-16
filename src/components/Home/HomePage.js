@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
-import { withFirebase } from "../Firebase/index.js";
-
-import { mainTopics } from "./topics.js";
 import PostContainer from "./PostContainer.js";
+import PostForm from "./PostForm.js";
+
+import { withFirebase } from "../Firebase/index.js";
+import { mainTopics } from "./topics.js";
 
 const INITIAL_STATE = {
    editing: false,
@@ -25,6 +26,8 @@ class HomePage extends Component {
       this.handleDatabaseUpdate = this.handleDatabaseUpdate.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
+      this.editPost = this.editPost.bind(this);
+      this.deletePost = this.deletePost.bind(this);
       this.updateFromDatabase = this.updateFromDatabase.bind(this);
    }
 
@@ -68,7 +71,7 @@ class HomePage extends Component {
       this.props.databaseUpdate(isDatabaseUpdated);
    }
 
-   handleSubmit(event) {
+   handleSubmit(event, object) {
       const { title, date, topic, article } = this.state;
 
       const newPublication = {
@@ -81,12 +84,22 @@ class HomePage extends Component {
       const { email, uid } = this.props.firebase.auth.currentUser;
 
       this.props.firebase.userPosts(uid).push(newPublication);
-      this.props.firebase.pushByTopic(topic, {
+      let postKey;
+
+      this.props.firebase
+         .userPosts(uid)
+         .limitToLast(1)
+         .on("child_added", snapshot => {
+            postKey = snapshot.key;
+         });
+
+      const keyEmail = email.substring(0, email.indexOf("@"));
+
+      this.props.firebase.setByTopic(topic, `${keyEmail}${postKey}`, {
          email,
          ...newPublication,
       });
 
-      this.state.myPosts.push(newPublication);
       this.setState({ editing: false });
 
       this.handleDatabaseUpdate(false);
@@ -99,23 +112,49 @@ class HomePage extends Component {
       });
    }
 
-   render() {
-      const {
+   editPost(event, postInformation) {
+      const { postId, title, date, topic, article } = postInformation;
+
+      const changes = {
          title,
          date,
          topic,
          article,
-         error,
-         mainTopics,
-         myPosts,
-      } = this.state;
+      };
 
-      const isInvalid =
-         title === "" ||
-         article === "" ||
-         topic === "" ||
-         topic === "-" ||
-         date === "";
+      const { email, uid } = this.props.firebase.auth.currentUser;
+
+      this.props.firebase.userPosts(uid).child(postId).set(changes);
+      const keyEmail = email.substring(0, email.indexOf("@"));
+      this.props.firebase.setByTopic(topic, `${keyEmail}${postId}`, {
+         email,
+         ...changes,
+      });
+
+      this.setState({ editing: false });
+
+      this.handleDatabaseUpdate(false);
+      event.preventDefault();
+   }
+
+   deletePost(event, postInfo) {
+      const { email, uid } = this.props.firebase.auth.currentUser;
+
+      this.props.firebase.userPosts(uid).child(postInfo.postId).remove();
+      const keyEmail = email.substring(0, email.indexOf("@"));
+      this.props.firebase
+         .topic(postInfo.topic)
+         .child(`${keyEmail}${postInfo.postId}`)
+         .remove();
+
+      this.setState({ editing: false });
+
+      this.handleDatabaseUpdate(false);
+      event.preventDefault();
+   }
+
+   render() {
+      const postsToSend = this.state.myPosts;
 
       return (
          <div>
@@ -124,56 +163,22 @@ class HomePage extends Component {
 
             {this.state.editing ? (
                <div>
-                  <form onSubmit={this.handleSubmit}>
-                     <input
-                        name="title"
-                        value={title}
-                        onChange={this.handleChange}
-                        type="text"
-                        placeholder="Title"
-                     />
-                     <input
-                        name="date"
-                        value={date}
-                        onChange={this.handleChange}
-                        type="date"
-                        placeholder="Date of creation"
-                     />
-                     <section>
-                        <label htmlFor="topic">
-                           Select the topic of your text:{" "}
-                        </label>
-                        <select
-                           name="topic"
-                           value={topic}
-                           onChange={this.handleChange}
-                        >
-                           {mainTopics.map((topic, index) => (
-                              <option key={index} value={topic}>
-                                 {topic}
-                              </option>
-                           ))}
-                        </select>
-                     </section>
-                     <textarea
-                        name="article"
-                        value={article}
-                        onChange={this.handleChange}
-                        placeholder="This is the body of your post"
-                     />
-                     <button disabled={isInvalid} type="submit">
-                        Post it
-                     </button>
-
-                     {error && <p>{error.message}</p>}
-                  </form>
+                  <PostForm
+                     onChange={this.handleChange}
+                     onSubmit={this.handleSubmit}
+                     onDelete={this.deletePost}
+                  />
                   <button onClick={this.handleClick}>Cancel</button>
                </div>
             ) : (
                <div>
                   <button onClick={this.handleClick}>New post</button>
-                  {myPosts.length > 0 ? (
-                     <PostContainer posts={myPosts} />
+                  {postsToSend.length > 0 ? (
+                     <PostContainer
+                        posts={postsToSend}
+                        onEdit={this.editPost}
+                        onDelete={this.deletePost}
+                     />
                   ) : (
                      <p>There is no posts from you</p>
                   )}

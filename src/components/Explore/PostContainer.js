@@ -8,7 +8,6 @@ class PostContainer extends Component {
       super(props);
 
       this.state = {
-         loading: false,
          postsStack: new Stack(),
       };
 
@@ -43,7 +42,6 @@ class PostContainer extends Component {
       return (
          <div>
             <h1>{this.props.posts.id}:</h1>
-            {this.state.loading && <p>Loading ...</p>}
             {postsComponents.map((post, key) => (
                <Post key={key} value={post} />
             ))}

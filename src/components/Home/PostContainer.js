@@ -8,12 +8,13 @@ class PostContainer extends Component {
       super(props);
 
       this.state = {
-         loading: false,
          postsStack: new Stack(),
       };
 
       this.loadObjectsIntoStack = this.loadObjectsIntoStack.bind(this);
       this.getPostsArray = this.getPostsArray.bind(this);
+      this.handleEdit = this.handleEdit.bind(this);
+      this.handleDelete = this.handleDelete.bind(this);
    }
 
    componentWillMount() {
@@ -43,13 +44,25 @@ class PostContainer extends Component {
       return postsList;
    }
 
+   handleEdit(event, postInformation) {
+      this.props.onEdit(event, postInformation);
+   }
+
+   handleDelete(event, postInfo) {
+      this.props.onDelete(event, postInfo);
+   }
+
    render() {
       const postArray = this.getPostsArray();
       return (
          <div>
-            {this.state.loading && <p>Loading ...</p>}
             {postArray.map(post => (
-               <Post key={post.id} post={post} />
+               <Post
+                  key={post.id}
+                  post={post}
+                  onEdit={this.handleEdit}
+                  onDelete={this.handleDelete}
+               />
             ))}
          </div>
       );
