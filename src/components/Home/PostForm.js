@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { mainTopics } from "./topics.js";
 
+import "./PostForm.css";
+
 const INITIAL_STATE = {
    title: "",
    date: "",
@@ -68,9 +70,10 @@ class PostForm extends Component {
          date === "";
 
       return (
-         <div>
-            <form onSubmit={this.handleSubmit}>
+         <div className="form-container">
+            <form className="post-form" onSubmit={this.handleSubmit}>
                <input
+                  className="new-post-input"
                   name="title"
                   value={title}
                   onChange={this.handleChange}
@@ -78,6 +81,7 @@ class PostForm extends Component {
                   placeholder="Title"
                />
                <input
+                  className="new-post-input"
                   name="date"
                   value={date}
                   onChange={this.handleChange}
@@ -99,6 +103,7 @@ class PostForm extends Component {
                   </select>
                </section>
                <textarea
+                  className="article-text-area"
                   name="article"
                   value={article}
                   onChange={this.handleChange}

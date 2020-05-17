@@ -27,14 +27,13 @@ function App() {
 
    return (
       <Router>
-         <div>
+         <div className="App">
             <Navigation
                auth={isAuth}
                admin={isAdmin}
                handleAuth={userAuthenticated}
+               handleLogOut={userAuthenticated}
             />
-            {isAuth && <SignOutButton handleLogOut={userAuthenticated} />}
-            <hr />
             <Switch>
                <Route exact path={ROUTES.EXPLORE}>
                   <ExplorePage isUpdated={isDatabaseUpdated} />
@@ -84,6 +83,42 @@ function App() {
                   )}
                </Route>
             </Switch>
+
+            <footer>
+               <dl>
+                  <p>By @jonatlop</p>
+                  <dt>Published on:</dt>
+                  <dd>16 May 2020</dd>
+               </dl>
+               <a
+                  id="icon-anchor"
+                  href="https://icons8.com/icon/92773/documento"
+               >
+                  Documento icon by Icons8
+               </a>
+               <a
+                  id="icon-anchor"
+                  href="https://www.pexels.com/es-es/foto/arboles-arte-bonito-bosque-1539581/"
+               >
+                  Foto de Tim Mossholder en Pexels
+               </a>
+               Login Image by{" "}
+               <a href="https://pixabay.com/users/ROverhate-1759589/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1354358">
+                  Ronny Overhate
+               </a>{" "}
+               from{" "}
+               <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1354358">
+                  Pixabay
+               </a>
+               Login image background by{" "}
+               <a href="https://pixabay.com/users/ROverhate-1759589/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1354358">
+                  Ronny Overhate
+               </a>{" "}
+               from{" "}
+               <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1354358">
+                  Pixabay
+               </a>
+            </footer>
          </div>
       </Router>
    );

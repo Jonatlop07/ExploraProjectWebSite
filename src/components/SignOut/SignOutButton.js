@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withFirebase } from "../Firebase/index.js";
 
+import "./SignOutButton.css";
+
 class SignOutButton extends Component {
    constructor(props) {
       super(props);
@@ -15,7 +17,11 @@ class SignOutButton extends Component {
 
    render() {
       return (
-         <button type="button" onClick={this.handleClick}>
+         <button
+            className="sign-out-btn"
+            type="button"
+            onClick={this.handleClick}
+         >
             Sign Out
          </button>
       );

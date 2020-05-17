@@ -6,6 +6,8 @@ import PostForm from "./PostForm.js";
 import { withFirebase } from "../Firebase/index.js";
 import { mainTopics } from "./topics.js";
 
+import "./HomePage.css";
+
 const INITIAL_STATE = {
    editing: false,
    title: "",
@@ -157,22 +159,32 @@ class HomePage extends Component {
       const postsToSend = this.state.myPosts;
 
       return (
-         <div>
-            <h1>HomePage</h1>
-            <p>The Home Page is accessible by every signed in user.</p>
-
+         <div className="home-main">
+            <div className="header-home">
+               <h1>Share your work with other users</h1>
+            </div>
             {this.state.editing ? (
-               <div>
+               <div className="post-div-home">
                   <PostForm
                      onChange={this.handleChange}
                      onSubmit={this.handleSubmit}
                      onDelete={this.deletePost}
                   />
-                  <button onClick={this.handleClick}>Cancel</button>
+                  <button
+                     className="user-cancel-form"
+                     onClick={this.handleClick}
+                  >
+                     Cancel
+                  </button>
                </div>
             ) : (
-               <div>
-                  <button onClick={this.handleClick}>New post</button>
+               <div className="post-div-home">
+                  <button
+                     className="button-new-post"
+                     onClick={this.handleClick}
+                  >
+                     Create a new post
+                  </button>
                   {postsToSend.length > 0 ? (
                      <PostContainer
                         posts={postsToSend}
@@ -180,7 +192,9 @@ class HomePage extends Component {
                         onDelete={this.deletePost}
                      />
                   ) : (
-                     <p>There is no posts from you</p>
+                     <p style={{ fontSize: "1em" }}>
+                        There is no posts from you
+                     </p>
                   )}
                </div>
             )}

@@ -1,0 +1,57 @@
+.signup-main {
+   position: relative;
+   top: 5em;
+   width: 100%;
+   height: 30.2em;
+   background: url("../../resources/nature.jpg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   opacity: 0.9;
+}
+
+.signup-container {
+   width: 80%;
+   height: 9.5em;
+   margin-right: 10%;
+   margin-left: 10%;
+   padding-top: 1em;
+   background: rba(255, 255, 255, 0.5);
+   display: block;
+   text-align: center;
+}
+
+.signup-form {
+   text-align: left;
+}
+
+.signup-form input {
+   display: inline-block;
+   height: 2em;
+   width: 20%;
+   margin: 1em 40%;
+   text-align: left;
+}
+
+.signup-form button[type="submit"] {
+   display: inline-block;
+   margin-top: 1em;
+   margin-left: 40%;
+   margin-right: 40%;
+   height: 2em;
+   border-radius: 0.75em;
+   border: 1px;
+   background-color: rgb(140, 255, 140);
+   cursor: pointer;
+}
+
+.link-signup-text {
+   color: white;
+   margin-top: 1em;
+   font-size: 1.05em;
+}
+
+.link-signup {
+   color: white;
+   font-size: 1.05em;
+}

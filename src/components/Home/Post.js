@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PostForm from "./PostForm";
 
+import "./Post.css";
+
 class Post extends Component {
    constructor(props) {
       super(props);
@@ -47,34 +49,56 @@ class Post extends Component {
       const { title, date, topic, article } = this.state;
 
       if (this.props.post) {
-         //RECORDAR QUE EL ID SE GUARDA!!
-
-         return (
-            <div>
-               {!this.state.editing ? (
-                  <div>
-                     <p>{title}</p>
-                     <p>Date: {date}</p>
-                     <p>Topic: {topic}</p>
-                     <button onClick={this.handleClickShowArticle}>
-                        Let me see the content
+         if (!this.state.editing) {
+            return (
+               <article className="user-post-container">
+                  <div className="user-post-info">
+                     <p className="user-post-title">{title}</p>
+                     <p className="user-post-date">Date: {date}</p>
+                     <p className="user-post-topic"> Topic: {topic}</p>
+                     <button
+                        className="user-post-show-content"
+                        onClick={this.handleClickShowArticle}
+                     >
+                        See the content
                      </button>
-                     {this.state.isShowing && <p>{article}</p>}
-                     <button onClick={this.handleClick}>Edit</button>
-                     <button onClick={this.handlePostDelete}>Delete</button>
+                     <button
+                        className="user-edit-post"
+                        onClick={this.handleClick}
+                     >
+                        Edit
+                     </button>
+                     <button
+                        className="user-delete-post"
+                        onClick={this.handlePostDelete}
+                     >
+                        Delete
+                     </button>
                   </div>
-               ) : (
-                  <div>
-                     <PostForm
-                        postInfo={this.props.post}
-                        onChange={this.handleChange}
-                        onSubmit={this.handlePostEdit}
-                     />
-                     <button onClick={this.handleClick}>Cancel</button>
+                  <div className="user-post-body">
+                     {this.state.isShowing && (
+                        <p className="user-post-article">{article}</p>
+                     )}
                   </div>
-               )}
-            </div>
-         );
+               </article>
+            );
+         } else {
+            return (
+               <article className="user-post-form">
+                  <PostForm
+                     postInfo={this.props.post}
+                     onChange={this.handleChange}
+                     onSubmit={this.handlePostEdit}
+                  />
+                  <button
+                     className="user-cancel-form"
+                     onClick={this.handleClick}
+                  >
+                     Cancel
+                  </button>
+               </article>
+            );
+         }
       } else {
          return <p>Error al cargar esta publicación</p>;
       }

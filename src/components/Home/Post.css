@@ -1,0 +1,103 @@
+.user-post-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+   left: 5%;
+   width: 90%;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding: 1em 0;
+   border-color: rgb(162, 163, 238);
+   border-radius: 0.75em;
+   border-width: 0.25em;
+   border-style: solid;
+}
+
+.user-post-form {
+   position: relative;
+   left: 5%;
+   width: 90%;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding: 1em 0;
+   border-color: rgb(162, 163, 238);
+   border-radius: 0.75em;
+   border-width: 0.25em;
+   border-style: solid;
+}
+
+.user-post-info {
+   flex: 1 1 auto;
+   max-width: 40%;
+   padding: 0 2em;
+}
+
+.user-post-title {
+   color: rgb(36, 184, 243);
+   font-size: 1.5em;
+   font-weight: bold;
+}
+
+.user-post-topic {
+   margin-top: 1em;
+   color: rgb(148, 139, 139);
+   font-style: italic;
+   font-size: 1em;
+}
+
+.user-post-date {
+   margin-top: 1em;
+   color: rgb(148, 139, 139);
+   font-style: italic;
+   font-size: 0.8em;
+}
+
+.user-post-show-content {
+   margin-top: 1em;
+   padding: 0.75em 0.5em;
+   color: white;
+   background-color: rgba(36, 184, 243, 0.75);
+   font-size: 0.9em;
+   cursor: pointer;
+}
+
+.user-post-body {
+   flex: 1 1 auto;
+   max-width: 60%;
+   text-align: justify;
+}
+
+.user-post-article {
+   padding: 1em 2em;
+}
+
+.user-edit-post {
+   margin: 0 0.5em;
+   margin-top: 1em;
+   padding: 0.75em 1em;
+   color: wheat;
+   background-color: rgb(247, 36, 36);
+   border-radius: 0.5em;
+   font-size: 0.9em;
+   cursor: pointer;
+}
+
+.user-delete-post {
+   margin-top: 1em;
+   padding: 0.75em 0.5em;
+   color: wheat;
+   background-color: rgb(150, 3, 113);
+   border-radius: 0.5em;
+   font-size: 0.9em;
+   cursor: pointer;
+}
+
+.user-cancel-form {
+   padding: 0.75em 0.5em;
+   color: wheat;
+   background-color: rgb(247, 36, 36);
+   border-radius: 0.5em;
+   font-size: 1em;
+   cursor: pointer;
+}

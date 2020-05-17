@@ -4,6 +4,8 @@ import PostContainer from "./PostContainer.js";
 
 import { withFirebase } from "../Firebase/index.js";
 
+import "./ExplorePage.css";
+
 class ExplorePage extends Component {
    constructor(props) {
       super(props);
@@ -45,12 +47,18 @@ class ExplorePage extends Component {
 
    render() {
       return (
-         <div>
-            <h1>PublicationsPage</h1>
-            {this.state.postContainers.length > 0 &&
-               this.state.postContainers.map((posts, key) => (
-                  <PostContainer key={key} posts={posts} />
-               ))}
+         <div className="explore-main">
+            <div className="header-explora">
+               <h1>Welcome to Explora Projects Website</h1>
+            </div>
+            {
+               <div className="post-section-div">
+                  {this.state.postContainers.length > 0 &&
+                     this.state.postContainers.map((posts, key) => (
+                        <PostContainer key={key} posts={posts} />
+                     ))}
+               </div>
+            }
          </div>
       );
    }

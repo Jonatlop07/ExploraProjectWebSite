@@ -5,6 +5,8 @@ import { PasswordForgetLink } from "../PasswordForget/PasswordForget.js";
 
 import { withFirebase } from "../Firebase/index.js";
 
+import "./SignIn.css";
+
 const INITIAL_STATE = {
    email: "",
    password: "",
@@ -53,31 +55,35 @@ class SignInPage extends Component {
       const isInvalid = password === "" || email === "";
 
       return (
-         <div>
-            <h1>Sign In</h1>
-            <form onSubmit={this.handleSubmit}>
-               <input
-                  name="email"
-                  value={email}
-                  onChange={this.handleChange}
-                  type="text"
-                  placeholder="Email Address"
-               />
-               <input
-                  name="password"
-                  value={password}
-                  onChange={this.handleChange}
-                  type="password"
-                  placeholder="Password"
-               />
-               <button disabled={isInvalid} type="submit">
-                  Sign In
-               </button>
+         <div className="signin-main">
+            <div className="login-container">
+               <div className="login-img"></div>
+               <form className="signin-form" onSubmit={this.handleSubmit}>
+                  <input
+                     className="email-input"
+                     name="email"
+                     value={email}
+                     onChange={this.handleChange}
+                     type="text"
+                     placeholder="Email Address"
+                  />
+                  <input
+                     className="password-input"
+                     name="password"
+                     value={password}
+                     onChange={this.handleChange}
+                     type="password"
+                     placeholder="Password"
+                  />
+                  <button disabled={isInvalid} type="submit">
+                     Sign In
+                  </button>
 
-               {error && <p>{error.message}</p>}
-            </form>
-            <PasswordForgetLink />
-            <SignUpLink />
+                  {error && <p>{error.message}</p>}
+               </form>
+               <PasswordForgetLink />
+               <SignUpLink />
+            </div>
          </div>
       );
    }

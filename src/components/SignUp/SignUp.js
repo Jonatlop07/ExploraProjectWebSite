@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { withFirebase } from "../Firebase/index.js";
 import * as ROUTES from "../../constants/routes.js";
 
+import "./SignUp.css";
+
 const INITIAL_STATE = {
    username: "",
    email: "",
@@ -63,48 +65,55 @@ class SignUpPage extends Component {
          username === "";
 
       return (
-         <form onSubmit={this.handleSubmit}>
-            <input
-               name="username"
-               value={username}
-               onChange={this.handleChange}
-               type="text"
-               placeholder="Username"
-            />
-            <input
-               name="email"
-               value={email}
-               onChange={this.handleChange}
-               type="text"
-               placeholder="Email Address"
-            />
-            <input
-               name="passwordOne"
-               value={passwordOne}
-               onChange={this.handleChange}
-               type="password"
-               placeholder="Password"
-            />
-            <input
-               name="passwordTwo"
-               value={passwordTwo}
-               onChange={this.handleChange}
-               type="password"
-               placeholder="Confirm Password"
-            />
-            <button disabled={isInvalid} type="submit">
-               Sign Up
-            </button>
+         <div className="signup-main">
+            <div className="signup-container">
+               <form className="signup-form" onSubmit={this.handleSubmit}>
+                  <input
+                     name="username"
+                     value={username}
+                     onChange={this.handleChange}
+                     type="text"
+                     placeholder="Username"
+                  />
+                  <input
+                     name="email"
+                     value={email}
+                     onChange={this.handleChange}
+                     type="text"
+                     placeholder="Email Address"
+                  />
+                  <input
+                     name="passwordOne"
+                     value={passwordOne}
+                     onChange={this.handleChange}
+                     type="password"
+                     placeholder="Password"
+                  />
+                  <input
+                     name="passwordTwo"
+                     value={passwordTwo}
+                     onChange={this.handleChange}
+                     type="password"
+                     placeholder="Confirm Password"
+                  />
+                  <button disabled={isInvalid} type="submit">
+                     Sign Up
+                  </button>
 
-            {error && <p>{error.message}</p>}
-         </form>
+                  {error && <p>{error.message}</p>}
+               </form>
+            </div>
+         </div>
       );
    }
 }
 
 const SignUpLink = () => (
-   <p>
-      Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+   <p className="link-signup-text">
+      Don't have an account?{" "}
+      <Link className="link-signup" to={ROUTES.SIGN_UP}>
+         Sign Up
+      </Link>
    </p>
 );
 

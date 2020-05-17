@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./ExplorePage.css";
+
 class Post extends Component {
    constructor(props) {
       super(props);
@@ -17,19 +19,33 @@ class Post extends Component {
 
    render() {
       const { title, date, article, email } = this.props.value;
-      return (
-         <div>
-            {title && <p>{title}</p>}
-            {email && <span>By {email}</span>}
-            {date && <span>Date: {date}</span>}
-            {article && (
-               <button onClick={this.handleClick}>
-                  Let me see the content
-               </button>
-            )}
-            {this.state.isShowing && <p>{article}</p>}
-         </div>
-      );
+
+      if (title && date && article && email) {
+         return (
+            <article className="public-post">
+               <div className="post-info">
+                  {title && <p className="public-post-title">{title}</p>}
+                  {email && <p className="public-post-email">By {email}</p>}
+                  {date && <p className="public-post-date">Date: {date}</p>}
+                  {article && (
+                     <button
+                        className="public-post-show-content"
+                        onClick={this.handleClick}
+                     >
+                        See the content
+                     </button>
+                  )}
+               </div>
+               {this.state.isShowing && (
+                  <div className="post-body">
+                     <p className="public-post-article">{article}</p>
+                  </div>
+               )}
+            </article>
+         );
+      } else {
+         return <p></p>;
+      }
    }
 }
 

@@ -3,46 +3,80 @@ import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes.js";
 
+import "./Navigation.css";
+import SignOutButton from "../SignOut/SignOutButton.js";
+
 class Navigation extends Component {
+   constructor(props) {
+      super(props);
+      this.doLogOut = this.doLogOut.bind(this);
+   }
+
+   doLogOut(isLoggedOut) {
+      this.props.handleLogOut(isLoggedOut);
+   }
+
    render() {
       if (!this.props.auth) {
          return <NavigationNonAuth />;
       }
 
-      return <NavigationAuth admin={this.props.admin} />;
+      return (
+         <NavigationAuth
+            admin={this.props.admin}
+            handleLogOut={this.doLogOut}
+         />
+      );
    }
 }
 
 const NavigationAuth = props => (
-   <ul>
-      <li>
-         <Link to={ROUTES.EXPLORE}>Explore</Link>
-      </li>
-      <li>
-         <Link to={ROUTES.HOME}>Home</Link>
-      </li>
-      <li>
-         <Link to={ROUTES.ACCOUNT}>Account</Link>
-      </li>
-      {props.admin ? (
+   <nav>
+      <ul>
          <li>
-            <Link to={ROUTES.ADMIN}>Admin</Link>
+            <Link className="nav-option" to={ROUTES.EXPLORE}>
+               EXPLORE
+            </Link>
          </li>
-      ) : (
-         <li>Normal User</li>
-      )}
-   </ul>
+         <li>
+            <Link className="nav-option" to={ROUTES.HOME}>
+               HOME
+            </Link>
+         </li>
+         <li>
+            <Link className="nav-option" to={ROUTES.ACCOUNT}>
+               ACCOUNT
+            </Link>
+         </li>
+         {props.admin ? (
+            <li>
+               <Link className="nav-option" to={ROUTES.ADMIN}>
+                  ADMIN
+               </Link>
+            </li>
+         ) : (
+            <li className="user-type">Normal User</li>
+         )}
+         <SignOutButton handleLogOut={props.handleLogOut} />
+      </ul>
+   </nav>
 );
 
 const NavigationNonAuth = () => (
-   <ul>
-      <li>
-         <Link to={ROUTES.EXPLORE}>Explore</Link>
-      </li>
-      <li>
-         <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-      </li>
-   </ul>
+   <nav>
+      <ul>
+         <li>
+            <Link className="nav-option" to={ROUTES.EXPLORE}>
+               EXPLORE
+            </Link>
+         </li>
+         <li>
+            <Link className="nav-option" to={ROUTES.SIGN_IN}>
+               SIGN IN
+            </Link>
+         </li>
+      </ul>
+   </nav>
 );
 
 export default Navigation;

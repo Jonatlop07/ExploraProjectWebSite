@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Post from "./Post.js";
 import Stack from "../../data_structures/Stack/Stack.js";
 
+import "./PostContainer.css";
+
 class PostContainer extends Component {
    constructor(props) {
       super(props);
@@ -55,7 +57,7 @@ class PostContainer extends Component {
    render() {
       const postArray = this.getPostsArray();
       return (
-         <div>
+         <section className="post-home-section">
             {postArray.map(post => (
                <Post
                   key={post.id}
@@ -64,7 +66,7 @@ class PostContainer extends Component {
                   onDelete={this.handleDelete}
                />
             ))}
-         </div>
+         </section>
       );
    }
 }

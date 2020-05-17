@@ -1,0 +1,135 @@
+.explore-main {
+   position: relative;
+   top: 5em;
+}
+
+.header-explora {
+   background: url("../../resources/background_img.jpeg");
+   height: 21em;
+   width: 100%;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   z-index: -1;
+   opacity: 0.9;
+   box-shadow: 0 0.1em 0.62em 0.125em rgb(13, 12, 15);
+}
+
+.header-explora h1 {
+   position: relative;
+   top: 35%;
+   color: rgb(250, 250, 250);
+   font-size: 3em;
+   font-weight: bold;
+}
+
+.post-section-div {
+   position: relative;
+   left: 10%;
+   width: 80%;
+   margin-top: 2em;
+   margin-bottom: 6em;
+   padding-bottom: 1em;
+   align-content: center;
+   background-color: white;
+   box-shadow: -0.15em -0.15em 0.62em 0.125em rgb(13, 12, 15);
+}
+
+.post-section {
+   background-color: white;
+}
+
+.topic-name-div {
+   display: block;
+   padding: 1em 0;
+   background-color: teal;
+}
+
+.topic-name {
+   display: inline-block;
+   color: white;
+   font-size: 1.5em;
+}
+
+.topic-button {
+   display: inline-block;
+   width: 2.5em;
+   height: 2.5em;
+   position: absolute;
+   right: 1em;
+   background: url("../../resources/arrowButton.png");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+}
+
+.topic-button:hover {
+   width: 2.6em;
+   height: 2.6em;
+   box-shadow: 0.25em -0.25em 0.62em 0.125em rgba(61, 13, 252, 1);
+   cursor: pointer;
+}
+
+.public-post {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+   left: 5%;
+   width: 90%;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding: 1em 0;
+   border-color: rgb(162, 163, 238);
+   border-radius: 0.75em;
+   border-width: 0.25em;
+   border-style: solid;
+}
+
+.post-info {
+   flex: 1 1 auto;
+   min-width: 30%;
+   padding: 0 2em;
+}
+
+.public-post-title {
+   color: rgb(36, 184, 243);
+   font-size: 1.5em;
+   font-weight: bold;
+}
+
+.public-post-email {
+   margin-top: 1em;
+   color: rgb(148, 139, 139);
+   font-style: italic;
+   font-size: 1em;
+}
+
+.public-post-date {
+   margin-top: 1em;
+   color: rgb(148, 139, 139);
+   font-style: italic;
+   font-size: 0.75em;
+}
+
+.public-post-show-content {
+   margin-top: 1em;
+   padding: 0.75em 0.5em;
+   color: white;
+   background-color: rgba(36, 184, 243, 0.75);
+   font-size: 0.8em;
+}
+
+.public-post-show-content:hover {
+   cursor: pointer;
+}
+
+.post-body {
+   flex: 1 1 auto;
+   max-width: 60%;
+   text-align: justify;
+}
+
+.public-post-article {
+   padding: 1em 2em;
+}

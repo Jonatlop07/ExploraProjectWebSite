@@ -3,15 +3,19 @@ import React, { Component } from "react";
 import Post from "./Post.js";
 import Stack from "../../data_structures/Stack/Stack.js";
 
+import "./ExplorePage.css";
+
 class PostContainer extends Component {
    constructor(props) {
       super(props);
 
       this.state = {
+         isShowing: false,
          postsStack: new Stack(),
       };
 
       this.getPostsArray = this.getPostsArray.bind(this);
+      this.handleClick = this.handleClick.bind(this);
    }
 
    componentWillMount() {
@@ -24,6 +28,22 @@ class PostContainer extends Component {
             article: posts[key].article,
          });
       });
+   }
+
+   componentWillUpdate() {
+      const posts = this.props.posts;
+      Object.keys(posts).forEach(key => {
+         this.state.postsStack.push({
+            email: posts[key].email,
+            title: posts[key].title,
+            date: posts[key].date,
+            article: posts[key].article,
+         });
+      });
+   }
+
+   handleClick() {
+      this.setState({ isShowing: this.state.isShowing ? false : true });
    }
 
    getPostsArray() {
@@ -40,12 +60,22 @@ class PostContainer extends Component {
       const postsComponents = this.getPostsArray();
 
       return (
-         <div>
-            <h1>{this.props.posts.id}:</h1>
-            {postsComponents.map((post, key) => (
-               <Post key={key} value={post} />
-            ))}
-         </div>
+         <section className="post-section">
+            <div className="topic-name-div">
+               <h1 className="topic-name">{this.props.posts.id}</h1>
+               <button
+                  className="topic-button"
+                  onClick={this.handleClick}
+               ></button>
+            </div>
+            {this.state.isShowing ? (
+               postsComponents.map((post, key) => (
+                  <Post key={key} value={post} />
+               ))
+            ) : (
+               <p>Click in the arrow button to see the posts</p>
+            )}
+         </section>
       );
    }
 }
