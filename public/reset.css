@@ -102,11 +102,6 @@ body {
    line-height: 1;
 }
 
-footer {
-   position: fixed;
-   bottom: 0;
-}
-
 body {
    background: linear-gradient(
       90deg,

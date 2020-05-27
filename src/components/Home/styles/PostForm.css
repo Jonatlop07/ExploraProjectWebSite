@@ -1,14 +1,15 @@
 .form-container {
-   margin: 1em 0;
+   margin: 1rem 0;
    display: block;
    text-align: center;
 }
 
 .post-form {
+   margin-top: 4rem;
    display: inline-block;
-   width: 50%;
-   margin-left: 25%;
-   margin-right: 25%;
+   width: 75%;
+   margin-left: 12.5%;
+   margin-right: 12.5%;
    text-align: left;
 }
 
@@ -16,11 +17,16 @@
    display: inline-block;
    margin: 1em 0;
    width: 25%;
-   height: 2em;
+   height: 3em;
    border-radius: 0.75em;
    border: 1px;
-   background-color: rgb(140, 255, 140);
+   color: white;
+   background-color: rgba(150, 3, 113, 0.5);
    cursor: pointer;
+}
+
+.post-form button[type="submit"]:hover {
+   background-color: rgba(150, 3, 113, 1);
 }
 
 .post-form section label {
@@ -34,6 +40,7 @@
 
 .post-form section select option {
    margin-top: 1em;
+   height: 2em;
    border: slateblue solid 2px;
 }
 
@@ -49,10 +56,12 @@
    word-wrap: break-word;
    text-align: justify;
    text-justify: inter-word;
+   line-height: normal;
 }
 
 .new-post-input {
    display: block;
    margin-top: 1em;
+   height: 2em;
    border: slateblue solid 2px;
 }

@@ -40,9 +40,8 @@
 footer {
    width: 100%;
    position: fixed;
-   z-index: 10;
-   padding: 0.5em 0;
-   background-color: #f53434ce;
+   bottom: 0;
+   background-color: #f53434ff;
    color: #ffffff;
    font-size: 0.8em;
 }

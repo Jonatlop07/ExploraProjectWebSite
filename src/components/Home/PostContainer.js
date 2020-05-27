@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Post from "./Post.js";
 import Stack from "../../data_structures/Stack/Stack.js";
 
-import "./PostContainer.css";
+import "./styles/PostContainer.css";
 
 class PostContainer extends Component {
    constructor(props) {
@@ -42,7 +42,7 @@ class PostContainer extends Component {
 
    render() {
       return (
-         <section className="post-home-section">
+         <section className="home-post-container">
             {this.state.postsArray.map(post => (
                <Post
                   key={post.id}

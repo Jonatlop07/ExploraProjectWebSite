@@ -1,0 +1,28 @@
+.user-space {
+   align-items: center;
+   margin: 1rem 0;
+   margin-left: 0.5rem;
+   padding: 1rem;
+   overflow: hidden;
+}
+
+.user-info {
+   color: rgb(15, 2, 2);
+   padding: 0.5rem;
+   font-family: "Courier New", Courier, monospace;
+   font-size: 1rem;
+}
+
+.user-post-button {
+   margin-top: 1rem;
+   padding: 0.5rem;
+   color: white;
+   background-color: rgba(36, 184, 243, 0.75);
+   font-family: "Courier New", Courier, monospace;
+   font-size: 1rem;
+}
+
+.user-post-button:hover {
+   cursor: pointer;
+   background-color: rgb(52, 33, 223);
+}

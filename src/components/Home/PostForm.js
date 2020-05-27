@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import ReactHtmlParser from "react-html-parser";
 
 import { mainTopics } from "./topics.js";
 
-import "./PostForm.css";
+import "./styles/PostForm.css";
 
 const INITIAL_STATE = {
    title: "",
@@ -118,7 +117,7 @@ class PostForm extends Component {
                   <Editor
                      initialValue={article}
                      init={{
-                        height: 350,
+                        height: 500,
                         menubar: false,
                         plugins: [
                            "advlist autolink lists link image charmap print preview anchor",
@@ -126,7 +125,9 @@ class PostForm extends Component {
                            "insertdatetime media table paste code help wordcount",
                         ],
                         toolbar:
-                           "undo redo | formatselect | bold italic backcolor | \
+                           "undo redo | fontselect fontsizeselect forecolor | \
+                           formatselect | bold italic backcolor underline | \
+                           subscript superscript | casechange emoticons image | \
                            alignleft aligncenter alignright alignjustify | \
                            bullist numlist outdent indent | removeformat | help",
                      }}
@@ -135,19 +136,12 @@ class PostForm extends Component {
                      }}
                   />
                </div>
-               <hr />
-
-               <div className="post-prev">
-                  <strong>Previsualization</strong>
-                  <hr />
-                  {ReactHtmlParser(article)}
-               </div>
 
                <button disabled={isInvalid} type="submit">
                   Post it
                </button>
 
-               {error && <p>{error.message}</p>}
+               {error && <p className="error-msg">{error.message}</p>}
             </form>
          </div>
       );

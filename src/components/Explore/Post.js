@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactHtmlParser from "react-html-parser";
 
-import "./ExplorePage.css";
+import "./styles/Post.css";
 
 class Post extends Component {
    constructor(props) {

@@ -7,8 +7,8 @@ import * as ROUTES from "../../constants/routes";
 import "./PasswordForget.css";
 
 const PasswordForgetPage = () => (
-   <div>
-      <p>Password Forgot</p>
+   <div id="pw-forget-main">
+      <p id="pw-forget-title">Password Forgotten</p>
       <PasswordForgetForm />
    </div>
 );
@@ -52,20 +52,22 @@ class PasswordForgetFormBase extends Component {
       const isInvalid = email === "";
 
       return (
-         <form onSubmit={this.handleSubmit}>
-            <input
-               name="email"
-               value={this.state.email}
-               onChange={this.handleChange}
-               type="text"
-               placeholder="Email Address"
-            />
-            <button disabled={isInvalid} type="submit">
-               Reset My Password
-            </button>
+         <div id="pw-forget-form-container">
+            <form id="pw-forget-form" onSubmit={this.handleSubmit}>
+               <input
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  type="text"
+                  placeholder="Email Address"
+               />
+               <button disabled={isInvalid} type="submit">
+                  Reset My Password
+               </button>
 
-            {error && <p>{error.message}</p>}
-         </form>
+               {error && <p>{error.message}</p>}
+            </form>
+         </div>
       );
    }
 }

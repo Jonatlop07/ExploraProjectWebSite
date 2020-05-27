@@ -1,4 +1,18 @@
-.account-main {
+#account-main {
    position: relative;
-   top: 5em;
+   top: 7em;
+   margin: 0 1.5rem;
+   background-color: white;
+   box-shadow: -0.15rem -0.15rem 0.62rem 0.125rem rgb(13, 12, 15);
+}
+
+#account-title {
+   padding: 1rem 0;
+   color: rgba(36, 184, 243, 0.75);
+   font-size: 1.5rem;
+   font-weight: bold;
+}
+
+.question-p {
+   padding: 1rem 0;
 }

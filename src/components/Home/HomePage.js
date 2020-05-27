@@ -6,7 +6,7 @@ import PostForm from "./PostForm.js";
 import { withFirebase } from "../Firebase/index.js";
 import { mainTopics } from "./topics.js";
 
-import "./HomePage.css";
+import "./styles/HomePage.css";
 
 const INITIAL_STATE = {
    editing: false,
@@ -152,12 +152,12 @@ class HomePage extends Component {
       const postsToSend = this.state.myPosts;
 
       return (
-         <div className="home-main">
-            <div className="header-home">
+         <div id="home-main">
+            <div id="home-header">
                <h1>Share your work with other users</h1>
             </div>
             {this.state.editing ? (
-               <div className="post-div-home">
+               <div id="home-post-section">
                   <PostForm
                      onSubmit={this.handleSubmit}
                      onDelete={this.deletePost}
@@ -170,11 +170,8 @@ class HomePage extends Component {
                   </button>
                </div>
             ) : (
-               <div className="post-div-home">
-                  <button
-                     className="button-new-post"
-                     onClick={this.handleClick}
-                  >
+               <div id="home-post-section">
+                  <button id="button-new-post" onClick={this.handleClick}>
                      Create a new post
                   </button>
                   {postsToSend.length > 0 ? (

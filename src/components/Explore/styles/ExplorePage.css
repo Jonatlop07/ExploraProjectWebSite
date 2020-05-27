@@ -1,0 +1,78 @@
+#explore-public-posts {
+   position: relative;
+   top: 5rem;
+}
+
+#explore-header {
+   height: 21rem;
+   width: 100%;
+   background: url("../../../resources/background_img.jpeg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   z-index: -1;
+   opacity: 0.9;
+   box-shadow: 0 0.1rem 0.62rem 0.125rem rgb(13, 12, 15);
+}
+
+#explore-header h1 {
+   position: relative;
+   top: 35%;
+   color: rgb(250, 250, 250);
+   font-size: 3rem;
+   font-weight: bold;
+}
+
+#explore-section {
+   margin: 2rem;
+   margin-bottom: 8rem;
+   display: flex;
+   flex-wrap: wrap;
+   background-color: white;
+   box-shadow: -0.15em -0.15em 0.62em 0.125em rgb(13, 12, 15);
+}
+
+#post-section {
+   width: 70%;
+}
+
+#user-posts-section {
+   width: 29%;
+   border-left: 1px solid black;
+}
+
+#user-posts-section-title {
+   padding-top: 1rem;
+   font-size: 1.5rem;
+   font-weight: bold;
+}
+
+#explore-user-posts-section {
+   position: relative;
+   top: 5rem;
+}
+
+#explore-user-posts-content {
+   margin: 2rem;
+   margin-bottom: 8rem;
+   background-color: white;
+   box-shadow: -0.15em -0.15em 0.62em 0.125em rgb(13, 12, 15);
+}
+
+#return-button {
+   margin-top: 1.2rem;
+   margin-bottom: 1.2rem;
+   padding: 0.5rem;
+   color: white;
+   background-color: rgb(150, 3, 113);
+   border-radius: 0.75rem;
+   font-size: 1.1rem;
+}
+
+#return-button:hover {
+   cursor: pointer;
+}
+
+#no-post-message {
+   padding: 1rem 0;
+}

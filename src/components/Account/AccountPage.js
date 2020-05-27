@@ -9,11 +9,15 @@ import "./AccountPage.css";
 class AccountPage extends Component {
    render() {
       return (
-         <div className="account-main">
-            <h1>Account: {this.props.firebase.auth.email}</h1>
-            <h1>Do you want to change your password? You can change it:</h1>
+         <div id="account-main">
+            <p id="account-title">Account: {this.props.firebase.auth.email}</p>
+            <p className="question-p">
+               Do you want to change your password? You can change it:
+            </p>
             <PasswordForgetForm />
-            <h1>Did you forgot your password? You can create a new one:</h1>
+            <p className="question-p">
+               Did you forgot your password? You can create a new one:
+            </p>
             <PasswordChangeForm />
          </div>
       );

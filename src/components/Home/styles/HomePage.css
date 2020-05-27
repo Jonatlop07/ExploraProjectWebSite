@@ -1,0 +1,46 @@
+#home-main {
+   position: relative;
+   top: 5rem;
+}
+
+#home-header {
+   height: 21rem;
+   width: 100%;
+   background: url("../../../resources/creativity_img.jpg");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   z-index: -1;
+   opacity: 0.9;
+   box-shadow: 0 0.1rem 0.62rem 0.125rem rgb(13, 12, 15);
+}
+
+#home-header h1 {
+   position: relative;
+   top: 8%;
+   color: rgb(250, 250, 250);
+   font-size: 3em;
+   font-weight: bold;
+}
+
+#home-post-section {
+   margin: 2rem;
+   margin-bottom: 6rem;
+   background-color: white;
+   box-shadow: -0.15em -0.15em 0.62em 0.125em rgb(13, 12, 15);
+}
+
+#button-new-post {
+   margin-top: 1.2rem;
+   margin-bottom: 1.2rem;
+   padding: 0.5rem;
+   color: white;
+   background-color: rgb(150, 3, 113);
+   border-radius: 0.75rem;
+   font-size: 1.25rem;
+}
+
+#button-new-post:hover {
+   background-color: rgb(102, 1, 77);
+   cursor: pointer;
+}

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Post from "./Post.js";
 import Stack from "../../data_structures/Stack/Stack.js";
 
-import "./ExplorePage.css";
+import "./styles/PostContainer.css";
 
 class PostContainer extends Component {
    constructor(props) {
@@ -60,7 +60,7 @@ class PostContainer extends Component {
       const postsComponents = this.getPostsArray();
 
       return (
-         <section className="post-section">
+         <section className="topic-post-section">
             <div className="topic-name-div">
                <h1 className="topic-name">{this.props.posts.id}</h1>
                <button
@@ -73,7 +73,9 @@ class PostContainer extends Component {
                   <Post key={key} value={post} />
                ))
             ) : (
-               <p>Click in the arrow button to see the posts</p>
+               <p className="post-instruction">
+                  Click in the arrow button to see the posts
+               </p>
             )}
          </section>
       );

@@ -3,7 +3,7 @@ import ReactHtmlParser from "react-html-parser";
 
 import PostForm from "./PostForm";
 
-import "./Post.css";
+import "./styles/Post.css";
 
 class Post extends Component {
    constructor(props) {
@@ -45,6 +45,7 @@ class Post extends Component {
       this.props.onDelete(event, {
          postId: this.state.id,
          topic: this.state.topic,
+         date: this.state.date,
       });
    }
 
@@ -54,8 +55,8 @@ class Post extends Component {
       if (this.props.post) {
          if (!this.state.editing) {
             return (
-               <article className="user-post-container">
-                  <div className="user-post-info">
+               <article className="home-user-post-container">
+                  <div className="home-user-post-info">
                      <p className="user-post-title">{title}</p>
                      <p className="user-post-date">Date: {date}</p>
                      <p className="user-post-topic"> Topic: {topic}</p>

@@ -1,0 +1,62 @@
+img {
+   max-width: 90%;
+   max-height: 800rem;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   overflow: hidden;
+}
+
+.public-post {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 1rem 1rem;
+   border-color: teal;
+   border-width: 0.5rem;
+   border-style: solid;
+}
+
+.post-info {
+   width: 40%;
+   padding: 0 2em;
+}
+
+.public-post-title {
+   color: rgb(36, 184, 243);
+   font-size: 1.5rem;
+   font-weight: bold;
+}
+
+.public-post-email {
+   margin-top: 1rem;
+   color: rgb(148, 139, 139);
+   font-style: italic;
+   font-size: 1rem;
+}
+
+.public-post-date {
+   margin-top: 1rem;
+   color: rgb(148, 139, 139);
+   font-style: italic;
+   font-size: 0.75rem;
+}
+
+.public-post-show-content {
+   margin-top: 1rem;
+   padding: 0.75rem 0.5rem;
+   color: white;
+   background-color: rgba(36, 184, 243, 0.75);
+   font-size: 0.9rem;
+}
+
+.public-post-show-content:hover {
+   background-color: rgb(52, 33, 223);
+   cursor: pointer;
+}
+
+.post-body {
+   max-width: 60%;
+   text-align: justify;
+   padding: 1em 2em;
+}

@@ -1,1 +1,17 @@
-export const mainTopics = ["-", "Videogames", "Arts", "Books"];
+export const mainTopics = [
+   "-",
+   "Arts",
+   "Books",
+   "Environment",
+   "Feminine sexuality",
+   "Gender-based violence",
+   "Land Disputes",
+   "Movies",
+   "Music",
+   "Philosophy of science",
+   "Photography",
+   "Rythm",
+   "Technology",
+   "Transportation",
+   "Videogames",
+];

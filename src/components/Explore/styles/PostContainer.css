@@ -1,0 +1,35 @@
+.topic-post-section {
+   width: 100%;
+}
+
+.topic-name-div {
+   width: inherit;
+   padding: 1rem 0;
+   background-color: teal;
+}
+
+.topic-name {
+   color: white;
+   font-size: 1.5rem;
+}
+
+.topic-button {
+   width: 2rem;
+   height: 2rem;
+   margin-top: 1rem;
+   background: url("../../../resources/arrowButton.png");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+}
+
+.topic-button:hover {
+   width: 2.2rem;
+   height: 2.2rem;
+   box-shadow: 0.25rem -0.25rem 0.62rem 0.125rem rgba(61, 13, 252, 1);
+   cursor: pointer;
+}
+
+.post-instruction {
+   padding: 1rem 0;
+}

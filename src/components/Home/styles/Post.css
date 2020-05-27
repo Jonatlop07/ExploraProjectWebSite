@@ -1,0 +1,93 @@
+img {
+   max-width: 90%;
+   max-height: 800rem;
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   overflow: hidden;
+}
+
+.home-user-post-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 1rem 1rem;
+   border-color: teal;
+   border-width: 0.5rem;
+   border-style: solid;
+}
+
+.home-user-post-info {
+   padding: 0 2em;
+   min-width: 30%;
+}
+
+.user-post-title {
+   color: rgb(36, 184, 243);
+   font-size: 1.5rem;
+   font-weight: bold;
+}
+
+.user-post-date,
+.user-post-topic {
+   margin-top: 1rem;
+   color: rgb(148, 139, 139);
+   font-style: italic;
+   font-size: 0.85rem;
+}
+
+.user-post-show-content {
+   margin-top: 1rem;
+   padding: 0.75rem 0.5rem;
+   color: white;
+   background-color: rgba(36, 184, 243, 0.75);
+   font-size: 0.9rem;
+}
+
+.user-post-body {
+   padding: 1rem;
+}
+
+.user-post-show-content:hover {
+   background-color: rgb(52, 33, 223);
+   cursor: pointer;
+}
+
+.user-edit-post {
+   margin: 0 0.5rem;
+   background-color: rgb(150, 3, 113);
+}
+
+.user-delete-post,
+.user-cancel-form {
+   background-color: rgb(247, 36, 36);
+   margin-bottom: 1rem;
+}
+
+.user-edit-post,
+.user-delete-post,
+.user-cancel-form {
+   margin-top: 1rem;
+   padding: 0.75rem 1rem;
+   color: white;
+   border-radius: 0.5rem;
+   font-size: 0.9rem;
+   cursor: pointer;
+}
+
+.user-delete-post:hover,
+.user-cancel-form:hover {
+   background-color: rgba(245, 3, 3, 1);
+}
+
+.user-edit-post:hover {
+   background-color: rgb(102, 1, 77);
+}
+
+.user-post-form {
+   margin-top: 1.5em;
+   padding: 1em 0;
+   border-color: teal;
+   border-width: 0.25em;
+   border-style: solid;
+}
