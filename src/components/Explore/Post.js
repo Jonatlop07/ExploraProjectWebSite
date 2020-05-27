@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactHtmlParser from "react-html-parser";
 
 import "./ExplorePage.css";
 
@@ -38,7 +39,9 @@ class Post extends Component {
                </div>
                {this.state.isShowing && (
                   <div className="post-body">
-                     <p className="public-post-article">{article}</p>
+                     <div className="public-post-article">
+                        {ReactHtmlParser(article)}
+                     </div>
                   </div>
                )}
             </article>

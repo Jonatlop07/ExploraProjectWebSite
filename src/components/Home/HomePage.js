@@ -10,11 +10,7 @@ import "./HomePage.css";
 
 const INITIAL_STATE = {
    editing: false,
-   title: "",
-   date: "",
-   topic: "",
-   article: "",
-   error: null,
+   updated: false,
    mainTopics,
 };
 
@@ -27,7 +23,6 @@ class HomePage extends Component {
       this.handleClick = this.handleClick.bind(this);
       this.handleDatabaseUpdate = this.handleDatabaseUpdate.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleChange = this.handleChange.bind(this);
       this.editPost = this.editPost.bind(this);
       this.deletePost = this.deletePost.bind(this);
       this.updateFromDatabase = this.updateFromDatabase.bind(this);
@@ -38,7 +33,7 @@ class HomePage extends Component {
    }
 
    componentWillUpdate(nextProps, nextState) {
-      if (!this.state.editing && nextState.editing) {
+      if (!nextState.updated) {
          this.updateFromDatabase();
       }
    }
@@ -54,14 +49,18 @@ class HomePage extends Component {
       this.props.firebase.userPosts(userUID).on("value", snapshot => {
          const postsObject = snapshot.val();
 
-         const postsList = Object.keys(postsObject).map(key => {
-            return {
-               ...postsObject[key],
-               id: key,
-            };
-         });
+         if (postsObject) {
+            const postsList = Object.keys(postsObject).map(key => {
+               return {
+                  ...postsObject[key],
+                  id: key,
+               };
+            });
 
-         this.setState({ myPosts: postsList });
+            this.setState({ myPosts: postsList });
+         }
+
+         this.setState({ updated: true });
       });
    }
 
@@ -73,8 +72,8 @@ class HomePage extends Component {
       this.props.databaseUpdate(isDatabaseUpdated);
    }
 
-   handleSubmit(event, object) {
-      const { title, date, topic, article } = this.state;
+   handleSubmit(event, postInformation) {
+      const { title, date, topic, article } = postInformation;
 
       const newPublication = {
          title,
@@ -97,7 +96,7 @@ class HomePage extends Component {
 
       const keyEmail = email.substring(0, email.indexOf("@"));
 
-      this.props.firebase.setByTopic(topic, `${keyEmail}${postKey}`, {
+      this.props.firebase.setByTopic(topic, `${date}${keyEmail}${postKey}`, {
          email,
          ...newPublication,
       });
@@ -106,12 +105,6 @@ class HomePage extends Component {
 
       this.handleDatabaseUpdate(false);
       event.preventDefault();
-   }
-
-   handleChange(event) {
-      this.setState({
-         [event.target.name]: event.target.value,
-      });
    }
 
    editPost(event, postInformation) {
@@ -128,12 +121,12 @@ class HomePage extends Component {
 
       this.props.firebase.userPosts(uid).child(postId).set(changes);
       const keyEmail = email.substring(0, email.indexOf("@"));
-      this.props.firebase.setByTopic(topic, `${keyEmail}${postId}`, {
+      this.props.firebase.setByTopic(topic, `${date}${keyEmail}${postId}`, {
          email,
          ...changes,
       });
 
-      this.setState({ editing: false });
+      this.setState({ updated: false });
 
       this.handleDatabaseUpdate(false);
       event.preventDefault();
@@ -146,10 +139,10 @@ class HomePage extends Component {
       const keyEmail = email.substring(0, email.indexOf("@"));
       this.props.firebase
          .topic(postInfo.topic)
-         .child(`${keyEmail}${postInfo.postId}`)
+         .child(`${postInfo.date}${keyEmail}${postInfo.postId}`)
          .remove();
 
-      this.setState({ editing: false });
+      this.setState({ updated: false });
 
       this.handleDatabaseUpdate(false);
       event.preventDefault();
@@ -166,7 +159,6 @@ class HomePage extends Component {
             {this.state.editing ? (
                <div className="post-div-home">
                   <PostForm
-                     onChange={this.handleChange}
                      onSubmit={this.handleSubmit}
                      onDelete={this.deletePost}
                   />

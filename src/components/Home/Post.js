@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import ReactHtmlParser from "react-html-parser";
+
 import PostForm from "./PostForm";
 
 import "./Post.css";
@@ -36,6 +38,7 @@ class Post extends Component {
 
    handlePostEdit(event, postInformation) {
       this.props.onEdit(event, postInformation);
+      this.setState({ editing: this.state.editing ? false : true });
    }
 
    handlePostDelete(event) {
@@ -76,9 +79,7 @@ class Post extends Component {
                      </button>
                   </div>
                   <div className="user-post-body">
-                     {this.state.isShowing && (
-                        <p className="user-post-article">{article}</p>
-                     )}
+                     {this.state.isShowing && ReactHtmlParser(article)}
                   </div>
                </article>
             );

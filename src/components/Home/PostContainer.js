@@ -10,40 +10,26 @@ class PostContainer extends Component {
       super(props);
 
       this.state = {
-         postsStack: new Stack(),
+         postsArray: [],
       };
 
-      this.loadObjectsIntoStack = this.loadObjectsIntoStack.bind(this);
-      this.getPostsArray = this.getPostsArray.bind(this);
+      this.setPostsArray = this.setPostsArray.bind(this);
       this.handleEdit = this.handleEdit.bind(this);
       this.handleDelete = this.handleDelete.bind(this);
    }
 
    componentWillMount() {
-      this.loadObjectsIntoStack();
+      this.setPostsArray();
    }
 
-   loadObjectsIntoStack() {
-      const posts = this.props.posts;
-      posts.forEach(post => {
-         this.state.postsStack.push({
-            id: post.id,
-            title: post.title,
-            date: post.date,
-            topic: post.topic,
-            article: post.article,
-         });
-      });
-   }
-
-   getPostsArray() {
-      const postsList = [];
-      const postsStack = this.state.postsStack;
-      while (!postsStack.isEmpty()) {
-         postsList.push(postsStack.pop());
+   componentWillReceiveProps(nextProps) {
+      if (!nextProps.posts === this.state.postsArray) {
+         this.state.postsArray = nextProps.posts.reverse();
       }
+   }
 
-      return postsList;
+   setPostsArray() {
+      this.setState({ postsArray: this.props.posts.reverse() });
    }
 
    handleEdit(event, postInformation) {
@@ -55,10 +41,9 @@ class PostContainer extends Component {
    }
 
    render() {
-      const postArray = this.getPostsArray();
       return (
          <section className="post-home-section">
-            {postArray.map(post => (
+            {this.state.postsArray.map(post => (
                <Post
                   key={post.id}
                   post={post}

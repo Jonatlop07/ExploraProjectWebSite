@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Editor } from "@tinymce/tinymce-react";
+import ReactHtmlParser from "react-html-parser";
 
 import { mainTopics } from "./topics.js";
 
@@ -37,26 +39,31 @@ class PostForm extends Component {
    }
 
    handleSubmit(event) {
-      this.props.onSubmit(
-         event,
-         this.props.postInfo
-            ? {
-                 postId: this.props.postInfo.id,
-                 title: this.state.title,
-                 date: this.state.date,
-                 topic: this.state.topic,
-                 article: this.state.article,
-              }
-            : {}
-      );
+      let postInfo;
+      if (this.props.postInfo) {
+         postInfo = {
+            postId: this.props.postInfo.id,
+            title: this.state.title,
+            date: this.state.date,
+            topic: this.state.topic,
+            article: this.state.article,
+         };
+      } else {
+         postInfo = {
+            title: this.state.title,
+            date: this.state.date,
+            topic: this.state.topic,
+            article: this.state.article,
+         };
+      }
+
+      this.props.onSubmit(event, postInfo);
    }
 
    handleChange(event) {
       this.setState({
          [event.target.name]: event.target.value,
       });
-
-      this.props.onChange(event);
    }
 
    render() {
@@ -102,13 +109,40 @@ class PostForm extends Component {
                      ))}
                   </select>
                </section>
-               <textarea
-                  className="article-text-area"
-                  name="article"
-                  value={article}
-                  onChange={this.handleChange}
-                  placeholder="This is the body of your post"
-               />
+
+               <hr />
+               <br />
+               <p>Write your post here:</p>
+
+               <div className="text-editor">
+                  <Editor
+                     initialValue={article}
+                     init={{
+                        height: 350,
+                        menubar: false,
+                        plugins: [
+                           "advlist autolink lists link image charmap print preview anchor",
+                           "searchreplace visualblocks code fullscreen",
+                           "insertdatetime media table paste code help wordcount",
+                        ],
+                        toolbar:
+                           "undo redo | formatselect | bold italic backcolor | \
+                           alignleft aligncenter alignright alignjustify | \
+                           bullist numlist outdent indent | removeformat | help",
+                     }}
+                     onEditorChange={(content, editor) => {
+                        this.setState({ article: content });
+                     }}
+                  />
+               </div>
+               <hr />
+
+               <div className="post-prev">
+                  <strong>Previsualization</strong>
+                  <hr />
+                  {ReactHtmlParser(article)}
+               </div>
+
                <button disabled={isInvalid} type="submit">
                   Post it
                </button>
