@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import Post from "./Post.js";
-import Stack from "../../data_structures/Stack/Stack.js";
 
 import "./styles/PostContainer.css";
 
@@ -11,53 +10,31 @@ class PostContainer extends Component {
 
       this.state = {
          isShowing: false,
-         postsStack: new Stack(),
+         posts: [],
       };
 
-      this.getPostsArray = this.getPostsArray.bind(this);
       this.handleClick = this.handleClick.bind(this);
-   }
-
-   componentWillMount() {
-      const posts = this.props.posts;
-      Object.keys(posts).forEach(key => {
-         this.state.postsStack.push({
-            email: posts[key].email,
-            title: posts[key].title,
-            date: posts[key].date,
-            article: posts[key].article,
-         });
-      });
-   }
-
-   componentWillUpdate() {
-      const posts = this.props.posts;
-      Object.keys(posts).forEach(key => {
-         this.state.postsStack.push({
-            email: posts[key].email,
-            title: posts[key].title,
-            date: posts[key].date,
-            article: posts[key].article,
-         });
-      });
    }
 
    handleClick() {
       this.setState({ isShowing: this.state.isShowing ? false : true });
    }
 
-   getPostsArray() {
-      const postsList = [];
-      const postsStack = this.state.postsStack;
-      while (!postsStack.isEmpty()) {
-         postsList.push(postsStack.pop());
-      }
-
-      return postsList;
+   componentWillMount() {
+      const posts = [];
+      Object.keys(this.props.posts).forEach(key =>
+         posts.push({
+            email: this.props.posts[key].email,
+            title: this.props.posts[key].title,
+            date: this.props.posts[key].date,
+            article: this.props.posts[key].article,
+         })
+      );
+      this.setState({ posts: posts.reverse() });
    }
 
    render() {
-      const postsComponents = this.getPostsArray();
+      const postsComponents = this.state.posts;
 
       return (
          <section className="topic-post-section">

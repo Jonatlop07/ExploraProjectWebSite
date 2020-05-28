@@ -63,3 +63,24 @@
    color: white;
    font-size: 1.05rem;
 }
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   .signup-main {
+      top: 3rem;
+      height: 35.4rem;
+      margin-bottom: 3rem;
+   }
+
+   .signup-form input {
+      height: 1.5em;
+      width: 70%;
+      margin: 1rem 15%;
+   }
+
+   .signup-form button[type="submit"] {
+      height: 2.5rem;
+      margin-top: 1em;
+      margin-left: 40%;
+      margin-right: 30%;
+   }
+}

@@ -16,3 +16,10 @@
 .question-p {
    padding: 1rem 0;
 }
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   #account-main {
+      top: 5rem;
+      margin-bottom: 6rem;
+   }
+}

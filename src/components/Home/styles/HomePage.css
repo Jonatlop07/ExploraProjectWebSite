@@ -44,3 +44,28 @@
    background-color: rgb(102, 1, 77);
    cursor: pointer;
 }
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   #home-main {
+      top: 3rem;
+   }
+
+   #home-header {
+      height: 18rem;
+   }
+
+   #home-header h1 {
+      top: 10%;
+      font-size: 2em;
+   }
+
+   #button-new-post {
+      margin-top: 1.2rem;
+      margin-bottom: 1.2rem;
+      padding: 0.5rem;
+      color: white;
+      background-color: rgb(150, 3, 113);
+      border-radius: 0.75rem;
+      font-size: 1.1rem;
+   }
+}

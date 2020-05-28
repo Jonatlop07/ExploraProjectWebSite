@@ -6,6 +6,7 @@ export const mainTopics = [
    "Feminine sexuality",
    "Gender-based violence",
    "Land Disputes",
+   "Landscape Architecture",
    "Movies",
    "Music",
    "Philosophy of science",

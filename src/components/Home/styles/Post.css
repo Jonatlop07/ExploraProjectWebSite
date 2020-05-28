@@ -91,3 +91,24 @@ img {
    border-width: 0.25em;
    border-style: solid;
 }
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   img {
+      width: 70%;
+      height: 20rem;
+   }
+
+   .home-user-post-container {
+      display: block;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1rem;
+   }
+
+   .user-post-show-content,
+   .user-edit-post,
+   .user-delete-post,
+   .user-cancel-form {
+      padding: 0.5rem 0.75rem;
+   }
+}

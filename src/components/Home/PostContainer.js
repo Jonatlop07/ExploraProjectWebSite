@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import Post from "./Post.js";
-import Stack from "../../data_structures/Stack/Stack.js";
 
 import "./styles/PostContainer.css";
 

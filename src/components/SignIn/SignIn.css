@@ -68,3 +68,30 @@
    margin: 1rem 0;
    color: white;
 }
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   .signin-main {
+      top: 3rem;
+      height: 35.4rem;
+      margin-bottom: 3rem;
+   }
+
+   .login-img {
+      height: 6rem;
+      width: 60%;
+      margin: 1rem 20%;
+   }
+
+   .signin-form input {
+      height: 1em;
+      width: 70%;
+      margin: 1rem 15%;
+   }
+
+   .signin-form button[type="submit"] {
+      height: 2.5rem;
+      margin-top: 1em;
+      margin-left: 40%;
+      margin-right: 30%;
+   }
+}

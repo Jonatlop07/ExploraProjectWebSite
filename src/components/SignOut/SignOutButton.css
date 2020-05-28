@@ -1,15 +1,23 @@
 .sign-out-btn {
    position: fixed;
-   top: 1.4em;
-   right: 1em;
+   top: 1.4rem;
+   right: 1rem;
    display: inline-block;
    border: none;
    background-color: #f53434ce;
    color: white;
-   font-size: 1.2em;
+   font-size: 1.2rem;
    text-decoration: none;
 }
 
 .sign-out-btn:hover {
    cursor: pointer;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   .sign-out-btn {
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.6rem;
+   }
 }

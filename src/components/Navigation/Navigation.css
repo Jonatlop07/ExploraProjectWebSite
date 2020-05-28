@@ -1,6 +1,6 @@
 nav {
    width: 100%;
-   height: 5em;
+   height: 5rem;
    position: fixed;
    z-index: 10;
    background-color: #f53434ff;
@@ -9,18 +9,18 @@ nav {
 
 nav ul {
    margin: 0;
-   padding: 20px 0;
+   padding: 1.2rem 0;
 }
 
 nav ul li {
    display: inline-block;
-   margin: 0.75em 4em;
+   margin: 0.75rem 4rem;
 }
 
 nav .nav-option {
-   width: 80px;
+   width: 5rem;
    color: #fff;
-   font-size: 1.2em;
+   font-size: 1.2rem;
    font-family: "Raleway", sans-serif;
    font-weight: lighter;
    text-decoration: none;
@@ -28,11 +28,33 @@ nav .nav-option {
 }
 
 .user-type {
-   margin-top: 0.5em;
-   padding: 0.4em;
+   margin-top: 0.5rem;
+   padding: 0.4rem;
    color: #fff;
    background-color: rgb(250, 124, 101);
    border-radius: 3px;
-   font-size: 1em;
+   font-size: 1rem;
    font-weight: lighter;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   nav {
+      height: 3rem;
+   }
+
+   nav ul {
+      padding: 0.6rem 0;
+   }
+
+   nav ul li {
+      margin: 0.25rem 0.7rem;
+   }
+
+   nav .nav-option {
+      font-size: 0.8rem;
+   }
+
+   .user-type {
+      display: none;
+   }
 }

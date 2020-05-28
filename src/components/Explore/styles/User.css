@@ -26,3 +26,20 @@
    cursor: pointer;
    background-color: rgb(52, 33, 223);
 }
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   .user-space {
+      margin: 0.4rem 0;
+      margin-left: 0;
+      padding: 0.7rem;
+   }
+
+   .user-info {
+      padding: 0.3rem;
+      font-size: 0.85rem;
+   }
+
+   .user-post-button {
+      padding: 0.3rem;
+   }
+}

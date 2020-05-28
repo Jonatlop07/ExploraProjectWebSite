@@ -49,3 +49,13 @@ footer {
 #icon-anchor {
    color: white;
 }
+
+@media only screen and (min-width: 300px) and (max-width: 500px) {
+   footer {
+      width: 100%;
+      position: static;
+      background-color: #f53434ff;
+      color: #ffffff;
+      font-size: 0.5em;
+   }
+}

@@ -133,6 +133,7 @@ class ExplorePage extends Component {
                      <button
                         id="return-button"
                         onClick={event => {
+                           this.setState({ userPosts: [] });
                            this.setState({ showingProfile: false });
                         }}
                      >
