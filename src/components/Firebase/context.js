@@ -9,3 +9,7 @@ export const withFirebase = Component => props => (
 );
 
 export default FirebaseContext;
+
+class Componente extends React.Component {}
+
+withFirebase(Componente);

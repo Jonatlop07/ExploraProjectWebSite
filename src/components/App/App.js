@@ -14,7 +14,6 @@ import PasswordForgetPage from "../PasswordForget/PasswordForget.js";
 import HomePage from "../Home/HomePage.js";
 import AccountPage from "../Account/AccountPage.js";
 import AdminPage from "../Admin/AdminPage.js";
-import SignOutButton from "../SignOut/SignOutButton.js";
 
 import * as ROUTES from "../../constants/routes.js";
 

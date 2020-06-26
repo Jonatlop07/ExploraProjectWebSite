@@ -78,20 +78,53 @@ class ExplorePage extends Component {
          this.setState({ userPosts: userPostsList });
       }
 
-      const { email, username } = userInfo;
+      const {
+         email,
+         username,
+         description,
+         audioName,
+         profileImageUrl,
+      } = userInfo;
 
-      this.setState({
-         currentProfile: {
-            email,
-            username,
-         },
-      });
-
-      this.setState({ showingProfile: true });
+      try {
+         this.props.firebase.storage
+            .ref("audios")
+            .child(audioName)
+            .getDownloadURL()
+            .then(url => {
+               this.setState({
+                  currentProfile: {
+                     email,
+                     username,
+                     description,
+                     audioLink: url,
+                     profileImageUrl,
+                  },
+                  showingProfile: true,
+               });
+            });
+      } catch (error) {
+         this.setState({
+            currentProfile: {
+               email,
+               username,
+               description,
+               audioLink: "",
+               profileImageUrl,
+            },
+            showingProfile: true,
+         });
+      }
    }
 
    render() {
-      const email = this.state.currentProfile.email;
+      const {
+         email,
+         profileImageUrl,
+         description,
+         username,
+         audioLink,
+      } = this.state.currentProfile;
       return (
          <div>
             {!this.state.showingProfile ? (
@@ -127,18 +160,41 @@ class ExplorePage extends Component {
             ) : (
                <div className="explore-user-posts-section">
                   <div id="explore-header">
-                     <h1>{this.state.currentProfile.username}'s Profile</h1>
+                     <h1>{username}'s Profile</h1>
                   </div>
+
+                  <div id="user-public-presentation">
+                     {description && (
+                        <p id="user-public-description">{description}</p>
+                     )}
+
+                     {profileImageUrl && (
+                        <figure>
+                           <img id="public-prof-img" src={profileImageUrl} />
+                        </figure>
+                     )}
+                     <div id="record-exit">
+                        {audioLink && (
+                           <audio
+                              id="user-public-recording"
+                              src={audioLink}
+                              controls
+                           ></audio>
+                        )}
+
+                        <button
+                           id="return-button"
+                           onClick={event => {
+                              this.setState({ userPosts: [] });
+                              this.setState({ showingProfile: false });
+                           }}
+                        >
+                           Return to the general posting section
+                        </button>
+                     </div>
+                  </div>
+
                   <div id="explore-user-posts-content">
-                     <button
-                        id="return-button"
-                        onClick={event => {
-                           this.setState({ userPosts: [] });
-                           this.setState({ showingProfile: false });
-                        }}
-                     >
-                        Return to the general posting section
-                     </button>
                      {this.state.userPosts.length > 0 ? (
                         this.state.userPosts.map((post, key) => (
                            <Post key={key} value={{ ...post, email }} />

@@ -19,7 +19,7 @@ class Post extends Component {
    }
 
    render() {
-      const { title, date, article, email } = this.props.value;
+      const { title, date, article, email, url } = this.props.value;
 
       if (title && date && article && email) {
          return (
@@ -41,6 +41,16 @@ class Post extends Component {
                   <div className="post-body">
                      <div className="public-post-article">
                         {ReactHtmlParser(article)}
+                        {url && (
+                           <iframe
+                              src={url}
+                              width="500"
+                              height="400"
+                              scrolling="no"
+                              frameBorder="0"
+                              allowFullScreen={true}
+                           ></iframe>
+                        )}
                      </div>
                   </div>
                )}

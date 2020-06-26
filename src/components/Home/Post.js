@@ -22,8 +22,15 @@ class Post extends Component {
    }
 
    componentWillMount() {
-      const { id, title, date, topic, article } = this.props.post;
-      this.setState({ id, title, date, topic, article });
+      const { id, title, date, topic, article, url } = this.props.post;
+      this.setState({
+         id,
+         title,
+         date,
+         topic,
+         article,
+         url,
+      });
    }
 
    handleChange(event) {}
@@ -50,7 +57,7 @@ class Post extends Component {
    }
 
    render() {
-      const { title, date, topic, article } = this.state;
+      const { title, date, topic, article, url } = this.state;
 
       if (this.props.post) {
          if (!this.state.editing) {
@@ -81,6 +88,15 @@ class Post extends Component {
                   </div>
                   <div className="user-post-body">
                      {this.state.isShowing && ReactHtmlParser(article)}
+                     {this.state.isShowing && url && (
+                        <iframe
+                           src={url}
+                           width="500"
+                           height="400"
+                           frameBorder="0"
+                           allowFullScreen={true}
+                        ></iframe>
+                     )}
                   </div>
                </article>
             );

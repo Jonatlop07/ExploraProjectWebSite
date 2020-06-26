@@ -5,7 +5,8 @@
 .topic-name-div {
    width: inherit;
    padding: 1rem 0;
-   background-color: teal;
+   /*background-color: teal;*/
+   background-color: var(--main-second-color);
 }
 
 .topic-name {
@@ -26,7 +27,7 @@
 .topic-button:hover {
    width: 2.2rem;
    height: 2.2rem;
-   box-shadow: 0.25rem -0.25rem 0.62rem 0.125rem rgba(61, 13, 252, 1);
+   box-shadow: 0.25rem -0.25rem 0.62rem 0.125rem var(--secondary-third-color);
    cursor: pointer;
 }
 
@@ -34,7 +35,7 @@
    padding: 1rem 0;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 500px) {
+@media only screen and (min-width: 200px) and (max-width: 800px) {
    .topic-name {
       color: white;
       font-size: 1.3rem;
@@ -43,7 +44,7 @@
    .topic-button:hover {
       width: 2.2rem;
       height: 2.2rem;
-      box-shadow: 0.25rem -0.25rem 0.62rem 0.125rem rgba(61, 13, 252, 1);
+      box-shadow: 0.25rem -0.25rem 0.62rem 0.125rem var(--secondary-third-color);
       cursor: pointer;
    }
 }

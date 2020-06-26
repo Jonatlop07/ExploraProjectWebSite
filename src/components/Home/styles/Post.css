@@ -12,18 +12,19 @@ img {
    align-items: center;
    justify-content: center;
    padding: 1rem 1rem;
-   border-color: teal;
+   border-color: var(--main-second-color);
    border-width: 0.5rem;
    border-style: solid;
 }
 
 .home-user-post-info {
-   padding: 0 2em;
+   max-width: 40%;
+   padding: 0 2rem;
    min-width: 30%;
 }
 
 .user-post-title {
-   color: rgb(36, 184, 243);
+   color: var(--main-third-color);
    font-size: 1.5rem;
    font-weight: bold;
 }
@@ -37,10 +38,12 @@ img {
 }
 
 .user-post-show-content {
+   max-width: 60%;
    margin-top: 1rem;
    padding: 0.75rem 0.5rem;
    color: white;
-   background-color: rgba(36, 184, 243, 0.75);
+   background-color: var(--main-third-color);
+   border-radius: 0.75rem;
    font-size: 0.9rem;
 }
 
@@ -49,18 +52,18 @@ img {
 }
 
 .user-post-show-content:hover {
-   background-color: rgb(52, 33, 223);
+   background-color: var(--secondary-third-color);
    cursor: pointer;
 }
 
 .user-edit-post {
    margin: 0 0.5rem;
-   background-color: rgb(150, 3, 113);
+   background-color: var(--main-fifth-color);
 }
 
 .user-delete-post,
 .user-cancel-form {
-   background-color: rgb(247, 36, 36);
+   background-color: var(--main-sixth-color);
    margin-bottom: 1rem;
 }
 
@@ -77,22 +80,22 @@ img {
 
 .user-delete-post:hover,
 .user-cancel-form:hover {
-   background-color: rgba(245, 3, 3, 1);
+   background-color: var(--secondary-sixth-color);
 }
 
 .user-edit-post:hover {
-   background-color: rgb(102, 1, 77);
+   background-color: var(--main-fourth-color);
 }
 
 .user-post-form {
    margin-top: 1.5em;
    padding: 1em 0;
-   border-color: teal;
-   border-width: 0.25em;
+   border-color: var(--main-second-color);
+   border-width: 0.5em;
    border-style: solid;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 500px) {
+@media only screen and (min-width: 200px) and (max-width: 800px) {
    img {
       width: 70%;
       height: 20rem;
@@ -110,5 +113,9 @@ img {
    .user-delete-post,
    .user-cancel-form {
       padding: 0.5rem 0.75rem;
+   }
+
+   iframe {
+      width: 100%;
    }
 }

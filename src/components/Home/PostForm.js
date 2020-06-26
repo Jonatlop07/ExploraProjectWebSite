@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 import { mainTopics } from "./topics.js";
+import { withFirebase } from "../Firebase/index.js";
 
 import "./styles/PostForm.css";
 
@@ -10,6 +11,7 @@ const INITIAL_STATE = {
    date: "",
    topic: "",
    article: "",
+   url: "",
    error: null,
 };
 
@@ -27,11 +29,12 @@ class PostForm extends Component {
 
    componentWillMount() {
       if (this.props.postInfo) {
-         const { title, date, topic, article } = this.props.postInfo;
+         const { title, date, topic, article, url } = this.props.postInfo;
          this.setState({
             title,
             date,
             topic,
+            url,
             article,
          });
       }
@@ -45,6 +48,7 @@ class PostForm extends Component {
             title: this.state.title,
             date: this.state.date,
             topic: this.state.topic,
+            url: this.state.url,
             article: this.state.article,
          };
       } else {
@@ -52,6 +56,7 @@ class PostForm extends Component {
             title: this.state.title,
             date: this.state.date,
             topic: this.state.topic,
+            url: this.state.url,
             article: this.state.article,
          };
       }
@@ -66,7 +71,7 @@ class PostForm extends Component {
    }
 
    render() {
-      const { title, date, topic, article, error } = this.state;
+      const { title, date, topic, article, url, error } = this.state;
 
       const isInvalid =
          title === "" ||
@@ -109,6 +114,15 @@ class PostForm extends Component {
                   </select>
                </section>
 
+               <input
+                  className="new-post-input"
+                  name="url"
+                  value={url}
+                  onChange={this.handleChange}
+                  type="text"
+                  placeholder="Flipbook url"
+               />
+
                <hr />
                <br />
                <p>Write your post here:</p>
@@ -148,4 +162,4 @@ class PostForm extends Component {
    }
 }
 
-export default PostForm;
+export default withFirebase(PostForm);

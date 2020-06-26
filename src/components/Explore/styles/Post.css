@@ -12,7 +12,8 @@ img {
    align-items: center;
    justify-content: center;
    padding: 1rem 1rem;
-   border-color: teal;
+   /*border-color: teal;*/
+   border-color: var(--main-second-color);
    border-width: 0.5rem;
    border-style: solid;
 }
@@ -23,7 +24,7 @@ img {
 }
 
 .public-post-title {
-   color: rgb(36, 184, 243);
+   color: var(--main-third-color);
    font-size: 1.5rem;
    font-weight: bold;
 }
@@ -46,12 +47,13 @@ img {
    margin-top: 1rem;
    padding: 0.75rem 0.5rem;
    color: white;
-   background-color: rgba(36, 184, 243, 0.75);
+   background-color: var(--main-third-color);
+   border-radius: 0.75rem;
    font-size: 0.9rem;
 }
 
 .public-post-show-content:hover {
-   background-color: rgb(52, 33, 223);
+   background-color: var(--secondary-third-color);
    cursor: pointer;
 }
 
@@ -59,9 +61,10 @@ img {
    max-width: 60%;
    text-align: justify;
    padding: 1em 2em;
+   word-break: break-all;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 500px) {
+@media only screen and (min-width: 200px) and (max-width: 800px) {
    img {
       width: 70%;
       height: 20rem;

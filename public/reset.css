@@ -109,3 +109,14 @@ body {
       rgba(228, 239, 233, 1) 100%
    );
 }
+
+body {
+   --main-first-color: rgb(166, 28, 49);
+   --main-second-color: rgb(149, 180, 59);
+   --main-third-color: rgb(70, 107, 63);
+   --secondary-third-color: rgb(54, 82, 48);
+   --main-fourth-color: rgb(86, 90, 92);
+   --main-fifth-color: rgb(177, 178, 176);
+   --main-sixth-color: rgb(118, 35, 47);
+   --secondary-sixth-color: rgb(63, 18, 25);
+}

@@ -23,6 +23,59 @@
    font-weight: bold;
 }
 
+#user-presentation {
+   margin: 2rem;
+   margin-bottom: 2rem;
+   background-color: white;
+   box-shadow: -0.15em -0.15em 0.62em 0.125em rgb(13, 12, 15);
+   display: flex;
+   align-items: center;
+   flex-direction: row;
+}
+
+#user-description {
+   flex-grow: 2;
+   margin: 0 2rem;
+   margin-top: 3rem;
+   margin-bottom: 1.5rem;
+   padding: 1rem;
+   font-family: "Times New Roman", Times, serif;
+   font-size: 1.25rem;
+   font-style: italic;
+   word-break: normal;
+   border: var(--main-second-color) solid 2px;
+   border-radius: 1rem;
+}
+
+#prof-img {
+   flex-grow: 1;
+   margin: 1rem auto;
+   max-width: 20rem;
+   max-height: 20rem;
+}
+
+#recording-section {
+   flex-grow: 1;
+   display: block;
+}
+
+#user-recording {
+   margin: 0.8rem 1rem;
+}
+
+#file-uploader {
+   margin-top: 1.5rem;
+   margin-bottom: 2rem;
+   word-break: normal;
+}
+
+#file-uploader button {
+   padding: 0.75rem 0.5rem;
+   color: white;
+   background-color: var(--main-third-color);
+   font-size: 0.9rem;
+}
+
 #home-post-section {
    margin: 2rem;
    margin-bottom: 6rem;
@@ -35,17 +88,17 @@
    margin-bottom: 1.2rem;
    padding: 0.5rem;
    color: white;
-   background-color: rgb(150, 3, 113);
+   background-color: var(--main-fifth-color);
    border-radius: 0.75rem;
-   font-size: 1.25rem;
+   font-size: 1rem;
 }
 
 #button-new-post:hover {
-   background-color: rgb(102, 1, 77);
+   background-color: var(--main-fourth-color);
    cursor: pointer;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 500px) {
+@media only screen and (min-width: 200px) and (max-width: 1000px) {
    #home-main {
       top: 3rem;
    }
@@ -64,7 +117,7 @@
       margin-bottom: 1.2rem;
       padding: 0.5rem;
       color: white;
-      background-color: rgb(150, 3, 113);
+      background-color: var(--main-fifth-color);
       border-radius: 0.75rem;
       font-size: 1.1rem;
    }

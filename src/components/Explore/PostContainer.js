@@ -22,14 +22,15 @@ class PostContainer extends Component {
 
    componentWillMount() {
       const posts = [];
-      Object.keys(this.props.posts).forEach(key =>
+      Object.keys(this.props.posts).forEach(key => {
          posts.push({
             email: this.props.posts[key].email,
             title: this.props.posts[key].title,
             date: this.props.posts[key].date,
             article: this.props.posts[key].article,
-         })
-      );
+            url: this.props.posts[key].url,
+         });
+      });
       this.setState({ posts: posts.reverse() });
    }
 

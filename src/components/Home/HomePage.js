@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FileUploader from "react-firebase-file-uploader";
 
 import PostContainer from "./PostContainer.js";
 import PostForm from "./PostForm.js";
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
    editing: false,
    updated: false,
    mainTopics,
+   description: "",
 };
 
 class HomePage extends Component {
@@ -20,6 +22,10 @@ class HomePage extends Component {
 
       this.state = { ...INITIAL_STATE, myPosts: [] };
 
+      this.getAudioLink = this.getAudioLink.bind(this);
+      this.getProfilePicture = this.getProfilePicture.bind(this);
+      this.getDescription = this.getDescription.bind(this);
+      this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
       this.handleClick = this.handleClick.bind(this);
       this.handleDatabaseUpdate = this.handleDatabaseUpdate.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +36,9 @@ class HomePage extends Component {
 
    componentWillMount() {
       this.updateFromDatabase();
+      this.getDescription();
+      this.getAudioLink();
+      this.getProfilePicture();
    }
 
    componentWillUpdate(nextProps, nextState) {
@@ -44,8 +53,59 @@ class HomePage extends Component {
       mainTopics.forEach(topic => this.props.firebase.topic(topic).off());
    }
 
+   getDescription() {
+      const userUID = this.props.firebase.auth.currentUser.uid;
+
+      this.props.firebase
+         .user(userUID)
+         .child("description")
+         .on("value", snapshot => {
+            const description = snapshot.val();
+
+            this.setState({ description });
+         });
+   }
+
+   getProfilePicture() {
+      const userUID = this.props.firebase.auth.currentUser.uid;
+
+      this.props.firebase
+         .user(userUID)
+         .child("profileImageUrl")
+         .on("value", snapshot => {
+            const imageLink = snapshot.val();
+
+            this.setState({ profilePicture: imageLink });
+         });
+   }
+
+   getAudioLink() {
+      const userUID = this.props.firebase.auth.currentUser.uid;
+      let audioName = "";
+
+      this.props.firebase
+         .user(userUID)
+         .child("audioName")
+         .on("value", snapshot => {
+            audioName = snapshot.val();
+         });
+
+      this.props.firebase.storage
+         .ref("audios")
+         .child(audioName)
+         .getDownloadURL()
+         .then(url => {
+            if (url) {
+               this.setState({
+                  audioLink: url,
+               });
+            }
+         });
+   }
+
    updateFromDatabase() {
       const userUID = this.props.firebase.auth.currentUser.uid;
+
       this.props.firebase.userPosts(userUID).on("value", snapshot => {
          const postsObject = snapshot.val();
 
@@ -64,6 +124,25 @@ class HomePage extends Component {
       });
    }
 
+   handleUploadSuccess(filename) {
+      const UID = this.props.firebase.auth.currentUser.uid;
+      console.log(filename);
+
+      this.props.firebase.storage
+         .ref("audios")
+         .child(filename)
+         .getDownloadURL()
+         .then(url => {
+            if (url) {
+               this.props.firebase.user(UID).child("audioName").set(filename);
+
+               this.setState({
+                  audioLink: url,
+               });
+            }
+         });
+   }
+
    handleClick() {
       this.setState({ editing: this.state.editing ? false : true });
    }
@@ -73,13 +152,15 @@ class HomePage extends Component {
    }
 
    handleSubmit(event, postInformation) {
-      const { title, date, topic, article } = postInformation;
+      const { title, date, topic, article, url, audioLink } = postInformation;
 
       const newPublication = {
          title,
          date,
          topic,
          article,
+         url,
+         audioLink,
       };
 
       const { email, uid } = this.props.firebase.auth.currentUser;
@@ -108,13 +189,23 @@ class HomePage extends Component {
    }
 
    editPost(event, postInformation) {
-      const { postId, title, date, topic, article } = postInformation;
+      const {
+         postId,
+         title,
+         date,
+         topic,
+         article,
+         url,
+         audioLink,
+      } = postInformation;
 
       const changes = {
          title,
          date,
          topic,
          article,
+         url,
+         audioLink,
       };
 
       const { email, uid } = this.props.firebase.auth.currentUser;
@@ -156,6 +247,31 @@ class HomePage extends Component {
             <div id="home-header">
                <h1>Share your work with other users</h1>
             </div>
+            <div id="user-presentation">
+               <p id="user-description">{this.state.description}</p>
+               {this.state.profilePicture && (
+                  <figure>
+                     <img id="prof-img" src={this.state.profilePicture} />
+                  </figure>
+               )}
+               <div id="recording-section">
+                  {this.state.audioLink && (
+                     <audio
+                        id="user-recording"
+                        src={this.state.audioLink}
+                        controls
+                     ></audio>
+                  )}
+
+                  <FileUploader
+                     id="file-uploader"
+                     accept="audio/*"
+                     name="audio"
+                     storageRef={this.props.firebase.storage.ref("audios")}
+                     onUploadSuccess={this.handleUploadSuccess}
+                  />
+               </div>
+            </div>
             {this.state.editing ? (
                <div id="home-post-section">
                   <PostForm
@@ -182,7 +298,7 @@ class HomePage extends Component {
                      />
                   ) : (
                      <p style={{ fontSize: "1em" }}>
-                        There is no posts from you
+                        There are no posts from you
                      </p>
                   )}
                </div>
